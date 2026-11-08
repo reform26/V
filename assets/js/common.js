@@ -89,10 +89,10 @@ window.avatar=p=>`<div class="ph">${initials(p.name)}${p.photo?`<img src="${esc(
  addEventListener('keydown',key);ok.onclick=()=>close();w.querySelector('#nt-today').onclick=()=>close(true);w.addEventListener('click',e=>{if(e.target===w)close()});
 })();
 
-/* 15차: 사이트 하단 문의 안내 (모든 페이지 공통). 메일 주소는 MAIL 한 곳에서만 수정 */
+/* 15차: 사이트 하단 문의 안내 + 방문자 수 배지(우하단) (모든 페이지 공통). 메일 주소는 MAIL 한 곳에서만 수정 */
 (function(){
  const MAIL='reform.orange26@gmail.com',m=document.querySelector('main');if(!m)return;
- m.insertAdjacentHTML('afterend',`<footer class="site-foot"><p>오류·정정·건의 사항이 있으시면 <span class="nw"><a href="mailto:${MAIL}">${MAIL}</a>으로</span> 연락해 주세요.</p></footer>`);
+ m.insertAdjacentHTML('afterend',`<footer class="site-foot"><p>오류·정정·건의 사항이 있으시면 <span class="nw"><a href="mailto:${MAIL}">${MAIL}</a>으로</span> 연락해 주세요.</p><div class="hit"><a href="https://myhits.vercel.app" target="_blank" rel="noopener noreferrer"><img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Freform26.github.io%2FV%2F?color=gray&amp;label=hits&amp;size=small" alt="hits" height="20"></a></div></footer>`);
 })();
 
 /* 16차: 선거구 관할지역 한 줄 (data/district-areas.js, 공직선거법 별표 1). 없으면 아무것도 표시하지 않음 */

@@ -124,7 +124,47 @@ let _rfReady;window.RFMapReady=new Promise(r=>_rfReady=r);
  /* 시도를 고르면 그 시도 선거구가 가득 차도록 확대(⟲ 초기화도 그 범위로), '전체 시도'면 전국 */
  const fitSido=()=>fit(sel.value?D.districts.filter(d=>d.sido===sel.value&&els.has(d.id)).map(d=>d.id):null,orig.w/10);
  sel.onchange=()=>{applySido();fitSido()};
- window.RFMap={D,els,select,clearSelection,fit,fitSido,applySido,selected:()=>selected,
+ /* 선거구로 확대: 선택한 선거구가 화면 가운데 오도록 이동(⟲ 초기화 기준 범위는 바꾸지 않음) */
+ function focusOn(id){const e=els.get(id);if(!e)return;const b=e.getBBox(),ar=orig.w/orig.h;
+  let w=Math.max(b.width*3.5,orig.w/9),h=w/ar;if(h<b.height*3.5){h=b.height*3.5;w=h*ar}
+  if(w>orig.w){w=orig.w;h=w/ar}
+  view={x:b.x+b.width/2-w/2,y:b.y+b.height/2-h/2,w,h};set()}
+ /* 선거구 검색: 선거구명(정식·원본 표기) > 관할지역(동 이름) 순으로, 인물 이름은 가장 먼저 찾음. 경기남부 보기에서는 지도에 보이는 선거구만 대상 */
+ (function(){
+  const inp=document.getElementById('mq'),list=document.getElementById('mqlist'),clr=document.getElementById('mqx');if(!inp||!list)return;
+  const norm=x=>String(x||'').toLowerCase().replace(/[\s·・,.\-()]/g,''),AREA=window.RF_DISTRICT_AREAS||{},MAX=8;
+  const idx=D.districts.filter(d=>els.has(d.id)).map(d=>({d,n:norm(d.name),c:norm(d.csvName),a:norm(AREA[d.id]),p:(D.psByD.get(d.id)||[]).map(q=>norm(q.name))}));
+  const usable=id=>{const e=els.get(id);return !!e&&!e.classList.contains('gs-off')&&!e.classList.contains('gs-dim')};
+  let hits=[],act=-1;
+  const find=q=>{const k=norm(q);if(!k)return[];const out=[];
+   idx.forEach(x=>{if(!usable(x.d.id))return;let s=0;
+    if(x.p.some(n=>n.includes(k)))s=3;else if(x.n.includes(k)||x.c.includes(k))s=2;else if(k.length>=2&&x.a.includes(k))s=1;
+    if(s)out.push({d:x.d,s})});
+   return out.sort((a,b)=>b.s-a.s||a.d.name.localeCompare(b.d.name,'ko'))};
+  const item=(h,i)=>{const p=D.pByD.get(h.d.id),sub=p?`${esc(p.name)}`:(h.s===1?'관할지역에 포함':RFData.NONE_LABEL);
+   return `<li role="option" id="mqo${i}" class="ms-i${i===act?' on':''}" data-id="${esc(h.d.id)}" aria-selected="${i===act}"><span class="ms-t"><b>${esc(h.d.name)}</b><small>${sub}${p&&h.s===1?' · 관할지역에 포함':''}</small></span>${p?`<span class="badge ${esc(p.status)}">${esc(RFData.STATUS[p.status]||'')}</span>`:''}</li>`};
+  function close(){list.hidden=true;inp.setAttribute('aria-expanded','false');inp.removeAttribute('aria-activedescendant');act=-1}
+  function render(){const q=inp.value;clr.hidden=!q;hits=find(q);act=-1;
+   if(!q.trim()){close();return}
+   list.innerHTML=hits.length?hits.slice(0,MAX).map(item).join('')+(hits.length>MAX?`<li class="ms-more" role="presentation">${hits.length-MAX}곳 더 있어요. 검색어를 더 입력해 보세요.</li>`:''):`<li class="ms-none" role="presentation">검색 결과가 없어요.</li>`;
+   list.hidden=false;inp.setAttribute('aria-expanded','true')}
+  function mark(i){act=i;list.querySelectorAll('.ms-i').forEach((e,j)=>{const o=j===i;e.classList.toggle('on',o);e.setAttribute('aria-selected',o);if(o){inp.setAttribute('aria-activedescendant',e.id);e.scrollIntoView({block:'nearest'})}});if(i<0)inp.removeAttribute('aria-activedescendant')}
+  function go(id){const d=D.dMap.get(id);if(!d)return;
+   if(sel.value&&d.sido!==sel.value){sel.value='';applySido();fitSido()} /* 시도 필터에 가려진 선거구면 필터 해제 */
+   select(id);focusOn(id);toPanel();inp.value='';clr.hidden=true;close();inp.blur()}
+  inp.addEventListener('input',render);
+  inp.addEventListener('focus',()=>{if(inp.value.trim())render()});
+  inp.addEventListener('keydown',e=>{const n=Math.min(hits.length,MAX);
+   if(e.key==='ArrowDown'&&n){e.preventDefault();if(list.hidden)render();mark((act+1)%n)}
+   else if(e.key==='ArrowUp'&&n){e.preventDefault();mark(act<=0?n-1:act-1)}
+   else if(e.key==='Enter'){if(n){e.preventDefault();go(hits[act<0?0:act].d.id)}}
+   else if(e.key==='Escape'){if(!list.hidden){e.preventDefault();e.stopPropagation();close()}else if(inp.value){inp.value='';render()}}});
+  list.addEventListener('mousedown',e=>e.preventDefault()); /* 입력창이 포커스를 잃어 목록이 닫히기 전에 클릭을 받기 위해 */
+  list.addEventListener('click',e=>{const li=e.target.closest('.ms-i');if(li)go(li.dataset.id)});
+  clr.addEventListener('click',()=>{inp.value='';render();inp.focus()});
+  document.addEventListener('mousedown',e=>{if(!e.target.closest('#msearch'))close()});
+ })();
+ window.RFMap={D,els,select,clearSelection,fit,fitSido,applySido,selected:()=>selected,focusOn,
   setHome:f=>{homeFn=f},showHome:home,setOnSelect:f=>{onSelect=f},minZoomW:orig.w/12};
  _rfReady(window.RFMap);
  const h=decodeURIComponent(location.hash.slice(1));if(h&&els.has(h))select(h);

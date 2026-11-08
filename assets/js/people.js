@@ -15,7 +15,9 @@
   const render=()=>{
    const k=$('kw').value.trim(),v=so.value,m=$('sort').value,st=$('status').value;
    const r=rows.filter(x=>(!st||x.p.status===st)&&(!v||x.d.sido===v)&&(!k||x.p.name.includes(k)||dname(x).includes(k)||(x.d.name||'').includes(k)||(x.d.csvName||'').includes(k)));
-   r.sort((a,b)=>m==='sido'?idx(a.d.sido)-idx(b.d.sido)||a.p.name.localeCompare(b.p.name,'ko'):a.p.name.localeCompare(b.p.name,'ko'));
+   /* 정렬: 가나다순(기본) / 당협위원장 우선(당협위원장 > 조직위원장 > 조직위 신청, 같은 단계 안에서는 가나다순) / 시도별 */
+   const rank=x=>{const i=sk.indexOf(x.p.status);return i<0?99:i},byName=(a,b)=>a.p.name.localeCompare(b.p.name,'ko');
+   r.sort((a,b)=>m==='sido'?idx(a.d.sido)-idx(b.d.sido)||byName(a,b):m==='status'?rank(a)-rank(b)||byName(a,b):byName(a,b));
    $('count').textContent=`${r.length}명`;
    list.innerHTML=r.length?r.map(x=>`<a class="card" href="person.html?id=${encodeURIComponent(x.p.id)}${q}">${photo(x.p)}<strong>${esc(x.p.name)}</strong><small>${esc(x.d.sido)}</small><small>${esc(dname(x))}</small><div class="cb">${badge(x.p)}</div></a>`).join(''):
    `<div class="empty" style="grid-column:1/-1">${rows.length?'검색 결과가 없습니다.':'등록된 인물 정보가 없습니다.'}</div>`};
@@ -24,8 +26,11 @@
  const box=document.getElementById('person');
  if(box){
   const id=new URLSearchParams(location.search).get('id'),x=rows.find(r=>r.p.id===id);
-  if(!x){box.innerHTML=`<div class="empty">해당 인물을 찾을 수 없습니다. <a href="people.html${q?'?demo=1':''}">목록으로</a></div>`;return}
+  const SITE='개혁신당 당협위원장 현황';
+  if(!x){document.title='인물을 찾을 수 없습니다 | '+SITE;box.innerHTML=`<div class="empty">해당 인물을 찾을 수 없습니다. <a href="people.html${q?'?demo=1':''}">목록으로</a></div>`;return}
   const{p,d}=x;
+  /* 탭 제목·검색 결과·북마크에 인물이 드러나도록 제목을 인물별로 설정 (예: 정찬옥 · 서울 중구·성동구 갑 당협위원장 | 개혁신당 당협위원장 현황) */
+  document.title=`${p.name} · ${[p.region||'',dname(x)].filter(Boolean).join(' ')} ${RFData.STATUS[p.status]||p.statusLabel||''}`.replace(/\s+$/,'')+' | '+SITE;
   box.innerHTML=`<span class="sido">${esc(d.sido)}</span><h2>${esc(dname(x))}</h2>${areaHtml(p.districtId)}`+personDetailHtml(p,d)+`<p><a href="people.html${q?'?demo=1':''}" style="color:var(--o-d)">목록으로</a></p>`;
  }
 })();

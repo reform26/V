@@ -1,369 +1,253 @@
-:root{--o:#f26b00;--o-d:#c75500;--o-l:#fff1e6;--bg:#f5f6f7;--tx:#1d2125;--mu:#6b7280;--ln:#e3e5e8;--r:8px;
---font:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 var(--font)}
+/* ==========================================================================
+   개혁신당 당협위원장 현황 — 통합 스타일시트
+   (6차~19차에 걸쳐 덮어쓰기로 쌓이던 규칙을 한 벌로 정리한 파일)
+   목차: 1 변수·다크 테마 / 2 기본·헤더 / 3 지도 / 4 우측 패널·인물 상세 / 5 목록 /
+         6 경기남부 / 7 비공식 안내 팝업·푸터 / 8 터치·모바일
+   다크 모드는 <html data-theme="dark"> 일 때 1번 변수 값만 바뀌며, 규칙은 한 벌입니다.
+   ========================================================================== */
+
+/* ---------- 1. 변수 · 다크 테마 ---------- */
+:root{
+ --o:#f26b00;--o-d:#d65f00;--o-l:#fff3e8;
+ --bg:#f2f4f6;--card:#fff;--sf:#f7f8fa;--ctl:#fff;
+ --tx:#191f28;--tx2:#4e5968;--mu:#8b95a1;--ln:#e5e8eb;--none:#d3d7db;
+ --r:14px;--rl:24px;--sh:0 2px 10px rgba(25,31,40,.10);
+ --font:"Pretendard Variable","Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+ --head-bg:rgba(255,255,255,.86);--head-sh:0 1px 0 rgba(25,31,40,.05);--legend-bg:rgba(255,255,255,.94);
+ --cell:#e6e8eb;--hl:#1d2125;--sel:#111;--sel-f:brightness(.92);--bd:#5b6573;--bd-o:1;
+ --tip-bg:#191f28;--tip-c:#fff;--warn:#b42318;--card-sh:0 10px 28px rgba(25,31,40,.12);
+ --ph-bg:#eef0f3;--ph-c:#b0b8c1;--cv-dot:#c9ced6;--dot-total:#191f28;--x-bg:#191f28;
+ --badge-bg:#eceff1;--badge-c:#444;--scrim:rgba(25,31,40,.56);--nt-sk:#f2f4f6;--nt-sk-h:#e5e8eb;
+ color-scheme:light}
+:root[data-theme=dark]{
+ --o-d:#ff8a3d;--o-l:#3a2312;
+ --bg:#0f1114;--card:#1a1d22;--sf:#22262c;--ctl:var(--sf);
+ --tx:#f2f4f6;--tx2:#b0b8c1;--mu:#8b95a1;--ln:#2b3038;--none:#3b424b;--sh:0 2px 12px rgba(0,0,0,.5);
+ --head-bg:rgba(26,29,34,.86);--head-sh:0 1px 0 rgba(255,255,255,.06);--legend-bg:rgba(34,38,44,.94);
+ --cell:#2b3037;--hl:#f2f4f6;--sel:#fff;--sel-f:none;--bd:#c3cad3;--bd-o:.55;
+ --tip-bg:#3a414a;--tip-c:#f2f4f6;--warn:#ff8a80;--card-sh:0 10px 28px rgba(0,0,0,.5);
+ --ph-bg:var(--sf);--ph-c:#5b6573;--cv-dot:#4e5968;--dot-total:#e5e8eb;--x-bg:#3a4049;
+ --badge-bg:#2b3038;--badge-c:#b0b8c1;--scrim:rgba(0,0,0,.66);--nt-sk:#2b3038;--nt-sk-h:#343a43;
+ color-scheme:dark}
+
+/* ---------- 2. 기본 · 헤더 ---------- */
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 var(--font);letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
 a{color:inherit}button,select,input{font:inherit}
 :focus-visible{outline:2px solid var(--o);outline-offset:2px}
-.site-header{display:flex;align-items:center;gap:24px;padding:0 20px;height:56px;background:#fff;border-bottom:1px solid var(--ln);position:sticky;top:0;z-index:10}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;white-space:nowrap}
-.mark{width:22px;height:22px;background:var(--o);border-radius:6px 6px 6px 0}
-.site-header nav{display:flex;gap:4px;margin-left:auto}
-.site-header nav a{padding:8px 12px;border-radius:var(--r);text-decoration:none;color:var(--mu);font-weight:500}
-.site-header nav a[aria-current=page]{background:var(--o-l);color:var(--o-d);font-weight:700}
-.demo-banner{background:#fff4d6;border-bottom:1px solid #f0d58a;padding:6px 20px;font-size:13px}
+[hidden]{display:none!important}
+.muted{color:var(--mu)}
+.empty{padding:40px 0;text-align:center;color:var(--mu);font-size:16px}
 main{max-width:1280px;margin:0 auto;padding:16px 20px 40px}
+
+.site-header{display:flex;align-items:center;gap:24px;padding:0 20px;height:56px;background:var(--head-bg);backdrop-filter:saturate(180%) blur(14px);border-bottom:0;box-shadow:var(--head-sh);position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;white-space:nowrap}
+.brand .logo{height:26px;width:auto;display:block}
+.brand .logo-d,:root[data-theme=dark] .brand .logo-l{display:none}
+:root[data-theme=dark] .brand .logo-d{display:block}
+.brand .t{padding-left:12px;margin-left:2px;border-left:1px solid var(--ln);line-height:20px;color:var(--tx2);font-weight:600}
+.site-header nav{display:flex;gap:4px;margin-left:auto}
+.site-header nav a{padding:8px 12px;border-radius:12px;text-decoration:none;color:var(--mu);font-weight:600}
+.site-header nav a[aria-current=page]{background:var(--bg);color:var(--tx);font-weight:700}
+.theme-btn{flex:none;width:40px;height:40px;margin-left:2px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:var(--mu);cursor:pointer}
+.theme-btn:hover{background:var(--bg);color:var(--tx)}
+.theme-btn svg{width:20px;height:20px;display:block}
+.theme-btn .i-sun,:root[data-theme=dark] .theme-btn .i-moon{display:none}
+:root[data-theme=dark] .theme-btn .i-sun{display:block}
+.demo-banner{background:#fff4d6;border-bottom:1px solid #f0d58a;padding:6px 20px;font-size:13px}
+:root[data-theme=dark] .demo-banner{background:#3a3220;border-bottom-color:#5c4a1c;color:#f3dfa2}
+
+/* ---------- 3. 지도 ---------- */
 .map-layout{display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start}
-.map-wrap{position:relative;background:#fff;border:1px solid var(--ln);border-radius:var(--r);height:calc(100vh - 150px);min-height:420px;overflow:hidden}
-#map{width:100%;height:100%}#map svg{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.map-wrap{position:relative;background:var(--card);border:0;border-radius:var(--rl);height:calc(100vh - 210px);min-height:420px;overflow:hidden;scroll-margin-top:68px}
+#map{width:100%;height:100%}
+#map svg{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 #map svg.drag{cursor:grabbing}
-#map svg [data-d]{fill:#e6e8eb;stroke:#fff;stroke-width:.6;cursor:pointer;transition:fill .12s}
-#map svg .s-appointed{fill:var(--o)}#map svg .s-organizing{fill:#f7bd5b}#map svg .s-vacant{fill:#9aa0a6}#map svg .s-unconfirmed{fill:#d3d7db}
-#map svg [data-d]:hover{stroke:#1d2125;stroke-width:1.4}
-#map svg .sel{stroke:#1d2125;stroke-width:2.2;filter:brightness(.92)}#map svg .dim{opacity:.25}
+#map svg [data-d]{fill:var(--cell);stroke:var(--card);stroke-width:.6;cursor:pointer;transition:fill .12s}
+#map svg .s-chairperson{fill:#f26b00}#map svg .s-organizing_chair{fill:#12a37f}#map svg .s-application{fill:#7c5cf0}#map svg .s-none{fill:var(--none)}
+#map svg [data-d]:hover{stroke:var(--hl);stroke-width:1.4}
+#map svg .sel,#map svg .sel:hover{stroke:var(--sel);stroke-width:3;filter:var(--sel-f)}
+#map svg .dim{opacity:.25}
+#map svg #sido-borders{pointer-events:none}
+#map svg #sido-borders path{fill:none;stroke:var(--bd);stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;opacity:var(--bd-o)}
 .map-empty{display:grid;place-items:center;height:100%;text-align:center;color:var(--mu);padding:24px}
 .map-tools{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:6px}
-.map-tools button{width:36px;height:36px;border:1px solid var(--ln);background:#fff;border-radius:var(--r);cursor:pointer;font-size:18px}
-.map-tools button:hover{border-color:var(--o);color:var(--o)}
+.map-tools button{width:40px;height:40px;border:0;background:var(--ctl);border-radius:14px;box-shadow:var(--sh);cursor:pointer;font-size:18px;color:var(--tx2)}
+.map-tools button:hover{color:var(--o-d)}
 .map-filter{position:absolute;left:12px;top:12px}
-.map-filter select{padding:7px 10px;border:1px solid var(--ln);border-radius:var(--r);background:#fff}
-.legend{position:absolute;left:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px 14px;background:#ffffffe6;padding:6px 10px;border-radius:var(--r);font-size:12px}
-.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.tip{position:fixed;pointer-events:none;background:#1d2125;color:#fff;padding:6px 10px;border-radius:6px;font-size:13px;z-index:20;display:none;max-width:240px}
-.panel{background:#fff;border:1px solid var(--ln);border-radius:var(--r);padding:20px;position:sticky;top:72px}
-.panel h2{margin:0 0 4px;font-size:20px}.panel h3{font-size:14px;margin:18px 0 6px;color:var(--mu)}
-.muted{color:var(--mu)}.sido{color:var(--o-d);font-weight:600;font-size:13px}
-.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600;background:#eceff1;color:#444}
-.badge.appointed{background:var(--o-l);color:var(--o-d)}.badge.organizing{background:#fdf0d2;color:#8a5a00}
-.profile{display:flex;gap:14px;align-items:center;margin:14px 0}
-.ph{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--o-l);color:var(--o-d);display:grid;place-items:center;font-weight:700;font-size:24px;flex:none}
-.panel ul{margin:0;padding-left:18px}.panel li{margin:2px 0}
-.stat{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin-top:8px}.stat b{text-align:right}
-.links a{display:inline-block;margin:0 8px 6px 0;color:var(--o-d)}
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 18px}
-.toolbar input,.toolbar select{padding:9px 12px;border:1px solid var(--ln);border-radius:var(--r);background:#fff}
-.toolbar input{flex:1;min-width:200px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
-.card{display:block;background:#fff;border:1px solid var(--ln);border-radius:var(--r);padding:18px;text-decoration:none;text-align:center}
-.card:hover{border-color:var(--o)}.card .ph{margin:0 auto 10px;width:88px;height:88px}
-.card strong{display:block;font-size:17px}.card small{display:block;color:var(--mu)}
-.empty{padding:40px 0;text-align:center;color:var(--mu)}
+.map-filter select{padding:10px 14px;border:0;border-radius:14px;background:var(--ctl);box-shadow:var(--sh);font-weight:600;color:var(--tx)}
+.legend{position:absolute;left:auto;right:14px;bottom:14px;display:flex;flex-direction:column;flex-wrap:wrap;gap:8px;padding:12px 16px;border-radius:16px;background:var(--legend-bg);box-shadow:var(--sh);color:var(--tx2);font-size:13px;font-weight:600}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.legend .lg-none{background:var(--none)}
+.tip{position:fixed;pointer-events:none;background:var(--tip-bg);color:var(--tip-c);padding:8px 12px;border-radius:10px;font-size:13px;z-index:20;display:none;max-width:240px}
+.src{max-width:920px;margin:20px 4px 0;font-size:12.5px;line-height:1.7;color:var(--mu)}.src a{color:var(--tx2)}
+.to-map{display:none}
+
+/* 선거구 검색 (지도 위) */
+.map-search{position:relative;max-width:440px;margin:0 0 12px}
+.ms-box{display:flex;align-items:center;gap:10px;height:48px;padding:0 6px 0 16px;border-radius:16px;background:var(--card);color:var(--mu)}
+.ms-box:focus-within{outline:2px solid var(--o)}
+.ms-box svg{flex:none;width:20px;height:20px}
+.ms-box input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;color:var(--tx);font-size:16px;font-weight:500;-webkit-appearance:none;appearance:none}
+.ms-box input::placeholder{color:var(--mu);font-weight:400}
+.ms-box input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.ms-x{flex:none;width:36px;height:36px;border:0;border-radius:12px;background:transparent;color:var(--mu);font-size:22px;line-height:1;cursor:pointer}
+.ms-x:hover{background:var(--bg);color:var(--tx)}
+.ms-list{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;list-style:none;margin:0;padding:6px;max-height:min(60vh,420px);overflow-y:auto;border-radius:16px;background:var(--card);box-shadow:var(--card-sh)}
+.ms-i{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer}
+.ms-i:hover,.ms-i.on{background:var(--bg)}
+.ms-t{flex:1;min-width:0}
+.ms-t b{display:block;font-size:15px;font-weight:700;color:var(--tx)}
+.ms-t small{display:block;margin-top:1px;font-size:13px;color:var(--mu)}
+.ms-i .badge{flex:none}
+.ms-more,.ms-none{padding:10px 12px;font-size:13px;color:var(--mu)}
+
+/* ---------- 4. 우측 패널 · 인물 상세 ---------- */
+.panel{background:var(--card);border:0;border-radius:var(--rl);padding:20px;position:sticky;top:72px;max-height:calc(100vh - 90px);overflow-y:auto;scroll-margin-top:68px}
+.wide .panel{padding:24px 26px 20px;font-size:15px}
 .detail{max-width:640px;margin:0 auto}
-@media(max-width:860px){.map-layout{grid-template-columns:1fr}.map-wrap{height:60vh}.panel{position:static}
-.site-header{gap:8px;padding:0 12px}.brand span.t{font-size:14px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-.src{margin:12px 2px 0;font-size:12px;color:var(--mu)}.src a{color:var(--o-d)}
-#map svg .s-chairperson{fill:#f26b00}#map svg .s-organizing_chair{fill:#12a37f}#map svg .s-application{fill:#7c5cf0}#map svg .s-none{fill:#d3d7db}
-.badge.chairperson{background:#fff1e6;color:#c75500}.badge.organizing_chair{background:#dff5ee;color:#0b7a5e}.badge.application{background:#ece8ff;color:#5b3fd0}
-.summary{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;align-items:center}.summary .badge{font-size:13px;padding:4px 12px}.summary .tot{font-weight:700;margin-left:6px}
-.ph{position:relative;overflow:hidden}.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.panel{max-height:calc(100vh - 90px);overflow-y:auto}
-.pcard{border:1px solid var(--ln);border-radius:var(--r);padding:14px;margin-top:12px}
-.pcard .profile{margin-top:0}.pname{font-size:20px;line-height:1.3}
-.panel h4{font-size:13px;margin:12px 0 4px}.cv{margin:0;padding-left:18px}.cv .yr{color:var(--o-d);font-weight:600;margin-right:4px}
-.kv{display:grid;grid-template-columns:84px 1fr;gap:4px 10px;margin:6px 0 0}.kv dt{color:var(--mu)}.kv dd{margin:0}
-.small{font-size:12px;margin:14px 0 0;text-align:right}.small a{color:var(--mu)}
-#map svg .sel,#map svg .sel:hover{stroke:#111;stroke-width:3}
-@media(max-width:860px){.panel{max-height:none;overflow:visible}}
-/* 지도 크기는 유지하고 우측 인물 패널만 가로·세로로 확장 (PC 전용) */
-@media(min-width:861px){
- main.wide{max-width:1400px}
- .wide .map-layout{grid-template-columns:minmax(0,1fr) 460px}
- .wide .panel{height:calc(100vh - 150px);min-height:420px;max-height:none;overflow-y:auto;padding:26px 28px;font-size:16px}
- .wide .panel h2{font-size:24px}.wide .panel h3{font-size:15px;margin-top:22px}
- .wide .pcard{padding:22px}.wide .panel .ph{width:96px;height:96px;font-size:34px}
- .wide .pname{font-size:26px}.wide .kv{grid-template-columns:100px 1fr;gap:8px 12px}
- .wide .panel .badge{font-size:13px;padding:3px 12px}
-}
-
-/* ===== 경기남부 자세히 보기 ===== */
-[hidden]{display:none!important}
-.gs-bar{margin:0 0 12px}
-.gs-btn{padding:9px 16px;border:1px solid var(--o);background:var(--o);color:#fff;border-radius:var(--r);font-weight:700;cursor:pointer}
-.gs-btn:hover{background:var(--o-d);border-color:var(--o-d)}.gs-btn.ghost{background:#fff;color:var(--o-d)}.gs-btn.ghost:hover{background:var(--o-l)}
-.gs-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{padding:7px 13px;border:1px solid var(--ln);background:#fff;border-radius:99px;cursor:pointer;font-weight:500}
-.chip small{color:var(--mu);margin-left:2px}.chip:hover{border-color:var(--o)}
-.chip.on{background:var(--o-l);border-color:var(--o);color:var(--o-d);font-weight:700}.chip.on small{color:var(--o-d)}
-.gs-sec h2{font-size:16px;margin:0 0 8px}.gs-sec h2 small{font-weight:400;font-size:12.5px;margin-left:6px}
-#gsstats{margin:0 0 12px}
-.gs-tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.tile{background:#fff;border:1px solid var(--ln);border-radius:var(--r);padding:8px 12px;border-left-width:4px}
-.tile span{display:block;font-size:12.5px;color:var(--mu)}.tile b{font-size:24px;line-height:1.2}
-.tile.chairperson{border-left-color:#f26b00}.tile.organizing_chair{border-left-color:#12a37f}.tile.application{border-left-color:#7c5cf0}.tile.none{border-left-color:#d3d7db}.tile.total{border-left-color:#1d2125}
-.gs-warn{color:#b42318;font-size:13px;margin:6px 0 0}
-#gslist{margin-top:16px}#gslist h2{margin-top:18px}#gslist h2:first-child{margin-top:0}
-.gs-scroll{overflow-x:auto}
-.gs-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--ln);font-size:14px}
-.gs-table th,.gs-table td{padding:8px 12px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}
-.gs-table th:first-child{text-align:left}.gs-table thead th{background:#fafbfb;color:var(--mu);font-weight:600;font-size:13px}
-.gs-table tr.on{background:var(--o-l)}.gs-table tfoot th,.gs-table tfoot td{background:#fafbfb;font-weight:700;border-bottom:0}
-.link{border:0;background:none;padding:0;color:var(--o-d);font-weight:700;cursor:pointer;text-decoration:underline}
-.gs-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:6px}
-.gs-row{width:100%;display:grid;grid-template-columns:52px minmax(0,1fr) 64px auto;gap:8px;align-items:center;text-align:left;padding:8px 12px;background:#fff;border:1px solid var(--ln);border-radius:var(--r);cursor:pointer}
-.gs-row:hover{border-color:var(--o)}.gs-row.on{border-color:#111;box-shadow:0 0 0 1px #111}
-.gs-row .c{color:var(--o-d);font-weight:600;font-size:13px}.gs-row .d{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gs-row .n{font-weight:600}
-#map svg .gs-off{display:none}
-#map svg .gs-dim{opacity:.22;pointer-events:none}
-@media(min-width:861px){.gs-mode .map-wrap,.gs-mode .wide .panel{height:max(420px,calc(100vh - 270px))}}
-@media(max-width:860px){.gs-tiles{grid-template-columns:repeat(2,1fr)}.tile.total{grid-column:1/-1}.gs-list{grid-template-columns:1fr}.gs-row{grid-template-columns:48px minmax(0,1fr) auto;grid-template-areas:'c d b' 'c n b';row-gap:0}.gs-row .c{grid-area:c}.gs-row .d{grid-area:d}.gs-row .n{grid-area:n;font-size:13px}.gs-row .badge{grid-area:b}}
-@media(max-width:860px){.gs-table th,.gs-table td{padding:7px 6px;font-size:12.5px}.gs-table thead th{font-size:11.5px}}
-/* 시도 경계선 (전국·시도 보기에서만, 경기남부 상세에서는 숨김) */
-#map svg #sido-borders{pointer-events:none}
-#map svg #sido-borders path{fill:none;stroke:#2b3138;stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round}
-.gs-mode #map svg #sido-borders{display:none}
-/* 당 로고 (헤더) */
-.brand .logo{height:26px;width:auto;display:block}
-.brand .t{padding-left:12px;margin-left:2px;border-left:1px solid var(--ln);line-height:20px}
-@media(max-width:860px){.brand .logo{height:22px}.brand .t{padding-left:8px;font-size:13px}}
-@media(max-width:860px){.site-header nav{gap:0}.site-header nav a{white-space:nowrap;padding:6px 8px;font-size:13px}.brand{gap:6px}}
-
-/* ===== 6차: 토스 스타일 (밝은 회색 배경 + 흰 카드, 큰 둥근 모서리, 굵은 제목, 테두리 최소화) ===== */
-:root{--o:#f26b00;--o-d:#d65f00;--o-l:#fff3e8;--bg:#f2f4f6;--tx:#191f28;--tx2:#4e5968;--mu:#8b95a1;--ln:#e5e8eb;--sf:#f7f8fa;--r:14px;--rl:24px;
---font:"Pretendard Variable","Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
---sh:0 2px 10px rgba(25,31,40,.10)}
-body{background:var(--bg);color:var(--tx);letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
-.site-header{background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(14px);border-bottom:0;box-shadow:0 1px 0 rgba(25,31,40,.05)}
-.brand .t{border-left-color:var(--ln);color:var(--tx2);font-weight:600}
-.site-header nav a{border-radius:12px;color:var(--mu);font-weight:600}
-.site-header nav a[aria-current=page]{background:var(--bg);color:var(--tx);font-weight:700}
-
-/* 지도 영역 */
-.map-wrap{border:0;border-radius:var(--rl)}
-.map-tools button{width:40px;height:40px;border:0;border-radius:14px;box-shadow:var(--sh);color:var(--tx2)}
-.map-tools button:hover{border:0;color:var(--o-d)}
-.map-filter select{border:0;border-radius:14px;box-shadow:var(--sh);padding:10px 14px;font-weight:600;color:var(--tx)}
-.legend{border-radius:14px;box-shadow:var(--sh);padding:9px 14px;color:var(--tx2);font-size:12.5px;background:rgba(255,255,255,.94)}
-.legend i{border-radius:50%}
-.tip{background:var(--tx);border-radius:10px;padding:8px 12px}
-
-/* 우측 상세 패널 */
-.panel{border:0;border-radius:var(--rl)}
-.wide .panel{padding:32px 28px 28px;font-size:15px}
 .panel .sido{display:block;font-size:14px;font-weight:600;color:var(--o-d)}
-.panel h2,.wide .panel h2{margin:2px 0 0;font-size:26px;font-weight:800;line-height:1.3;letter-spacing:-.03em;color:var(--tx)}
-.panel h3,.wide .panel h3{margin:0 0 12px;font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
+.panel h2,.wide .panel h2{margin:2px 0 0;font-size:24px;font-weight:800;line-height:1.3;letter-spacing:-.03em;color:var(--tx)}
+.panel h3,.wide .panel h3{margin:0 0 6px;font-size:16px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
 .panel h4{margin:18px 0 8px;font-size:13px;font-weight:600;color:var(--mu)}
-.panel .muted{color:var(--mu)}
-.badge{padding:4px 10px;border-radius:8px;font-size:12.5px;font-weight:700}
-.wide .panel .badge{padding:4px 10px;font-size:12.5px}
-.badge.chairperson,.badge.appointed{background:#fff1e6;color:#d65f00}
-.badge.organizing_chair{background:#e3f6ef;color:#0b7a5e}.badge.application{background:#efeaff;color:#5b3fd0}
 
-.panel .pcard,.wide .panel .pcard{border:0;border-radius:0;padding:0;margin-top:24px}
-.pcard+.pcard{margin-top:32px;padding-top:32px;border-top:1px solid var(--bg)}
-.panel .pcard .profile{display:flex;gap:20px;align-items:flex-end;margin:0 0 24px}
-.panel .pcard .profile .ph{width:152px;height:202px;border-radius:24px;background:var(--sf);color:var(--mu);font-size:52px;font-weight:800;flex:none}
-.pinfo{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;padding-bottom:4px}
-.panel .pcard .pname{font-size:30px;font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--tx);word-break:keep-all}
-.pmeta{display:flex;flex-wrap:wrap;row-gap:2px;font-size:14px;color:var(--mu)}
-.pmeta span+span{margin-left:10px;padding-left:10px;border-left:1px solid var(--ln)}
+/* 배지 */
+.badge{display:inline-block;padding:4px 10px;border-radius:8px;font-size:12.5px;font-weight:700;background:var(--badge-bg);color:var(--badge-c)}
+.badge.chairperson{background:#fff1e6;color:#d65f00}
+.badge.organizing_chair{background:#e3f6ef;color:#0b7a5e}
+.badge.application{background:#efeaff;color:#5b3fd0}
+:root[data-theme=dark] .badge.chairperson{background:rgba(242,107,0,.18);color:#ff9a52}
+:root[data-theme=dark] .badge.organizing_chair{background:rgba(18,163,127,.18);color:#4fd1a9}
+:root[data-theme=dark] .badge.application{background:rgba(124,92,240,.22);color:#b3a1ff}
 
-.panel .kv,.wide .panel .kv{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px 14px;margin:0 0 30px;padding:18px 20px;background:var(--sf);border-radius:18px}
-.panel .kv dt{color:var(--mu);font-size:14px}.panel .kv dd{margin:0;font-weight:600;color:var(--tx)}
-.panel .pcard>h3{margin-top:0}
-.cv{list-style:none;margin:0;padding:0}
-.panel .cv{padding:0}
-.cv li{position:relative;margin:0;padding:6px 0 6px 18px;line-height:1.5;color:var(--tx2)}
-.cv li::before{content:"";position:absolute;left:3px;top:15px;width:6px;height:6px;border-radius:50%;background:#c9ced6}
-.cv .yr{color:var(--o-d);font-weight:700;margin-right:6px}
-
-/* SNS 아이콘 */
-.wide .panel h3.h-links,.panel h3.h-links{margin-top:34px}
-.sns-row{display:flex;flex-wrap:wrap;gap:16px 12px}
-.sns{display:flex;flex-direction:column;align-items:center;gap:6px;width:62px;text-decoration:none;color:var(--tx2);font-size:12px;font-weight:600;text-align:center;line-height:1.3}
-.sns-i{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;background:var(--mu);transition:transform .12s ease}
-.sns:hover .sns-i{transform:translateY(-2px)}.sns:active .sns-i{transform:scale(.94)}
-.sns[data-k=facebook] .sns-i{background:#1877f2}
-.sns[data-k=instagram] .sns-i{background:linear-gradient(45deg,#fcaf45 0%,#e1306c 52%,#7b3fe4 100%)}
-.sns[data-k=youtube] .sns-i{background:#ff0033}
-.sns[data-k=blog] .sns-i{background:#03c75a}
-.sns[data-k=x] .sns-i{background:#191f28}
-.sns[data-k=link] .sns-i{background:#8b95a1}
-
-.panel .small{margin:32px 0 0;text-align:center;font-size:14px}
-.panel .small a{display:block;padding:14px;border-radius:14px;background:var(--bg);color:var(--tx2);font-weight:700;text-decoration:none}
-.panel .small a:hover{background:var(--ln)}
-.panel .stat{margin-top:16px;padding:16px 18px;background:var(--sf);border-radius:18px;gap:10px 12px;align-items:center}
-.panel .stat b{font-size:18px;color:var(--tx)}
-
-/* 목록·경기남부 화면도 같은 톤으로 */
-.card{border:0;border-radius:var(--rl);padding:22px 16px}
-.card:hover{box-shadow:var(--sh)}
-.card .ph{width:96px;height:128px;border-radius:22px;background:var(--sf);color:var(--mu)}
-.card strong{font-weight:800;letter-spacing:-.02em}
-.toolbar input,.toolbar select{border:0;border-radius:var(--r);padding:12px 14px;box-shadow:none}
-.gs-btn{border-radius:var(--r);padding:11px 18px;border-color:var(--o)}
-.gs-btn.ghost{background:#fff;border-color:#fff;color:var(--tx2)}.gs-btn.ghost:hover{background:var(--ln);border-color:var(--ln)}
-.chip{border:0;border-radius:99px;padding:8px 14px;color:var(--tx2)}
-.chip:hover{background:var(--ln)}
-.chip.on{background:var(--tx);color:#fff}.chip.on small{color:rgba(255,255,255,.7)}
-.tile,.tile.chairperson,.tile.organizing_chair,.tile.application,.tile.none,.tile.total{border:0;border-radius:18px;padding:14px 16px}
-.tile span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:var(--dot,#191f28)}
-.tile.chairperson{--dot:#f26b00}.tile.organizing_chair{--dot:#12a37f}.tile.application{--dot:#7c5cf0}.tile.none{--dot:#d3d7db}.tile.total{--dot:#191f28}
-.gs-scroll{border-radius:18px}
-.gs-table{border:0;border-radius:18px}
-.gs-table thead th,.gs-table tfoot th,.gs-table tfoot td{background:var(--sf)}
-.gs-row{border:0;border-radius:var(--r)}.gs-row.on{box-shadow:0 0 0 2px var(--tx)}
-@media(max-width:860px){.panel .pcard .profile .ph{width:128px;height:171px;font-size:44px}.panel .pcard .pname{font-size:26px}.panel{padding:24px 20px}}
-
-/* ===== 7차: 우측 패널 세로 길이 줄이기 (아이콘·상세 링크를 사진 옆으로, 간격 축소) ===== */
-.wide .panel{padding:24px 26px 20px}
-.panel h2,.wide .panel h2{font-size:24px}
-.panel .pcard,.wide .panel .pcard{margin-top:16px}
-.panel .pcard .profile{gap:18px;margin:0 0 16px}
-.panel .pcard .profile .ph{width:140px;height:186px;border-radius:22px;font-size:46px}
-.pinfo{gap:6px;padding-bottom:0}
-.panel .pcard .pname{font-size:28px}
-.pinfo .sns-row{gap:8px;margin-top:8px}
-.sns{width:auto;display:block}
-.sns-i{width:38px;height:38px;border-radius:13px}
-.sns-i svg{width:21px;height:21px}
-.sns:hover .sns-i{transform:translateY(-2px)}
-.pinfo .more{margin-top:4px;font-size:13px;font-weight:600;color:var(--mu);text-decoration:none}
-.pinfo .more:hover{color:var(--o-d)}
-.panel .kv,.wide .panel .kv{gap:8px 12px;margin:0 0 20px;padding:14px 18px;border-radius:16px}
-.panel h3,.wide .panel h3{margin:0 0 6px;font-size:16px}
-.cv li{padding:4px 0 4px 18px}.cv li::before{top:12px}
-@media(max-width:860px){.panel .pcard .profile .ph{width:120px;height:160px}.panel{padding:22px 18px}}
-
-/* ===== 8차: 당협위원장 목록 (큼직한 사진 카드, 토스 스타일) ===== */
-.page-title{margin:12px 0 4px;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.3}
-.page-title small{margin-left:6px;font-size:22px;font-weight:700;color:var(--o-d)}
-.summary{gap:10px;margin:12px 0 22px}
-.summary .badge{padding:8px 14px;border-radius:12px;font-size:15px;font-weight:700}
-.summary .tot{margin-left:8px;font-size:15px;color:var(--tx2);font-weight:600}
-.toolbar{gap:12px;margin:0 0 24px}
-.toolbar input,.toolbar select{height:54px;padding:0 18px;border-radius:16px;font-size:16px;font-weight:500;color:var(--tx)}
-.toolbar select{font-weight:600;padding-right:14px}
-.toolbar input::placeholder{color:var(--mu)}
-.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--o);outline-offset:0}
-
-.grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-.card{display:block;padding:12px 12px 20px;text-align:left;border-radius:28px;transition:transform .15s ease,box-shadow .15s ease}
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(25,31,40,.12)}
-.card .ph{width:100%;height:auto;aspect-ratio:3/4;margin:0 0 16px;border-radius:20px;font-size:72px;font-weight:800;background:#eef0f3;color:#b0b8c1}
-.card .ph img{object-position:center top}
-.card strong{padding:0 8px;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.3;color:var(--tx)}
-.card small{padding:0 8px;font-size:15px;line-height:1.5;color:var(--mu)}
-.card strong+small{margin-top:2px}
-.card small+small{color:var(--tx2);font-weight:600}
-.card .cb{margin:12px 8px 0}
-.card .badge{padding:6px 12px;font-size:14px;border-radius:10px}
-.empty{font-size:16px}
-@media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.card{padding:8px 8px 16px;border-radius:22px}.card .ph{border-radius:16px;font-size:48px}.card strong{font-size:18px;padding:0 6px}.card small{font-size:13px;padding:0 6px}.card .cb{margin:10px 6px 0}.page-title{font-size:26px}.toolbar input{flex-basis:100%}}
-
-/* ===== 9차: 전국 지도(index) 토스 스타일 ===== */
-.gs-btn{height:48px;padding:0 22px;font-size:15px;border-radius:16px}
-.gs-bar{margin:0 0 14px}
-/* 지도: 범례는 비어 있는 우측 하단으로, 시도 경계선은 덜 무겁게 */
-.legend{left:auto;right:14px;bottom:14px;flex-direction:column;gap:8px;padding:12px 16px;border-radius:16px;font-size:13px;font-weight:600}
-.legend i{width:10px;height:10px;margin-right:8px;vertical-align:0}
-#map svg #sido-borders path{stroke:#5b6573;stroke-width:1.1}
-#map svg [data-d]{stroke:#fff}
-/* 홈(요약) 패널 */
+/* 홈(요약) */
 .panel .home-hint{margin:6px 0 0;font-size:15px}
 .hero{display:flex;align-items:baseline;gap:6px;margin:28px 0 14px}
 .hero b{font-size:64px;line-height:1;font-weight:800;letter-spacing:-.04em;color:var(--tx)}
 .hero span{font-size:18px;font-weight:700;color:var(--tx2)}
 .bar{display:flex;gap:3px;height:12px;margin:0 0 22px}
-.bar i{display:block;min-width:8px;border-radius:99px;background:#d3d7db}
+.bar i{display:block;min-width:8px;border-radius:99px;background:var(--none)}
 .bar i.chairperson{background:#f26b00}.bar i.organizing_chair{background:#12a37f}.bar i.application{background:#7c5cf0}
-.panel .stat,.wide .panel .stat{margin-top:0;padding:8px 20px;gap:0 12px;border-radius:20px}
+.stat{display:grid;grid-template-columns:1fr auto}.stat b{text-align:right}
+.panel .stat,.wide .panel .stat{margin-top:0;padding:8px 20px;gap:0 12px;border-radius:20px;background:var(--sf);align-items:center}
 .panel .stat>span,.panel .stat>b{display:flex;align-items:center;min-height:56px}
-.panel .stat>b{justify-content:flex-end;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.panel .stat>b{justify-content:flex-end;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
 .panel .stat .badge{padding:6px 12px;font-size:14px;border-radius:10px}
 .panel .note{margin:16px 2px 0;font-size:13px;line-height:1.6}
-/* 하단 출처 */
-.src{max-width:920px;margin:20px 4px 0;font-size:12.5px;line-height:1.7;color:var(--mu)}
-.src a{color:var(--tx2)}
-@media(max-width:860px){.legend{right:10px;bottom:10px;flex-direction:row;flex-wrap:wrap;gap:6px 12px;padding:9px 12px}.hero b{font-size:52px}}
+.panel .muted{color:var(--mu)}
 
-/* ===== 경기남부 버튼: 지도 창 안(시도 선택 아래)으로 이동 ===== */
-.gs-bar{margin:0}.gs-ctl{margin:0 0 12px}
+/* 인물 카드 */
+.panel .pcard,.wide .panel .pcard{border:0;border-radius:0;padding:0;margin-top:16px}
+.panel .pcard+.pcard,.wide .panel .pcard+.pcard{margin-top:32px;padding-top:32px;border-top:1px solid var(--bg)}
+.panel .pcard .profile{display:flex;gap:18px;align-items:flex-end;margin:0 0 16px}
+.ph{position:relative;overflow:hidden;display:grid;place-items:center;flex:none;font-weight:800}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel .pcard .profile .ph{width:140px;height:186px;border-radius:22px;background:var(--sf);color:var(--mu);font-size:46px}
+.pinfo{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;padding-bottom:0}
+.panel .pcard .pname{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--tx);word-break:keep-all}
+.pmeta{display:flex;flex-wrap:wrap;row-gap:2px;font-size:14px;color:var(--mu)}
+.pmeta span+span{margin-left:10px;padding-left:10px;border-left:1px solid var(--ln)}
+.pinfo .more{margin-top:4px;font-size:13px;font-weight:600;color:var(--mu);text-decoration:none}
+.pinfo .more:hover{color:var(--o-d)}
+.panel .kv,.wide .panel .kv{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px 12px;margin:0 0 20px;padding:14px 18px;background:var(--sf);border-radius:16px}
+.panel .kv dt{color:var(--mu);font-size:14px}.panel .kv dd{margin:0;font-weight:600;color:var(--tx)}
+.cv{list-style:none;margin:0;padding:0}
+.cv li{position:relative;margin:0;padding:4px 0 4px 18px;line-height:1.5;color:var(--tx2)}
+.cv li::before{content:"";position:absolute;left:3px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--cv-dot)}
+.cv .yr{color:var(--o-d);font-weight:700;margin-right:6px}
+
+/* SNS 아이콘 */
+.sns-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.sns{display:block;text-decoration:none;color:var(--tx2)}
+.sns-i{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:var(--mu);transition:transform .12s ease}
+.sns-i svg{width:21px;height:21px}
+.sns:hover .sns-i{transform:translateY(-2px)}.sns:active .sns-i{transform:scale(.94)}
+.sns[data-k=facebook] .sns-i{background:#1877f2}
+.sns[data-k=instagram] .sns-i{background:linear-gradient(45deg,#fcaf45 0%,#e1306c 52%,#7b3fe4 100%)}
+.sns[data-k=youtube] .sns-i{background:#ff0033}
+.sns[data-k=blog] .sns-i{background:#03c75a}
+.sns[data-k=x] .sns-i,.sns[data-k=threads] .sns-i{background:var(--x-bg)}
+.sns[data-k=site] .sns-i{background:#f26b00}
+
+/* 관할지역 (한 줄 + 더보기) */
+.area{margin:6px 0 0;font-size:13px;line-height:1.65;color:var(--tx2);word-break:keep-all}
+.area b{display:inline;flex:none;margin:0;font-size:12.5px;font-weight:700;color:var(--mu);white-space:nowrap}
+.area-row{display:flex;align-items:baseline;gap:10px}.area-row b{align-self:baseline}
+.area-t{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.area.open .area-t{white-space:normal;overflow:visible;text-overflow:clip}.area.open .area-row{align-items:flex-start}
+.area-more{flex:none;border:0;background:none;padding:0;font:inherit;font-size:12.5px;font-weight:700;color:var(--o-d);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+
+/* ---------- 5. 당협위원장 목록 ---------- */
+.page-title{margin:12px 0 4px;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.3}
+.page-title small{margin-left:6px;font-size:22px;font-weight:700;color:var(--o-d)}
+.summary{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 22px;align-items:center}
+.summary .badge{padding:8px 14px;border-radius:12px;font-size:15px;font-weight:700}
+.summary .tot{margin-left:8px;font-size:15px;color:var(--tx2);font-weight:600}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 24px}
+.toolbar input,.toolbar select{height:54px;padding:0 18px;border:0;border-radius:16px;background:var(--card);box-shadow:none;font-size:16px;font-weight:500;color:var(--tx)}
+.toolbar input{flex:1;min-width:200px}
+.toolbar select{font-weight:600;padding-right:14px}
+.toolbar input::placeholder{color:var(--mu)}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid var(--o);outline-offset:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{display:block;background:var(--card);border:0;border-radius:28px;padding:12px 12px 20px;text-decoration:none;text-align:left;transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-3px);box-shadow:var(--card-sh)}
+.card .ph{width:100%;height:auto;aspect-ratio:3/4;margin:0 0 16px;border-radius:20px;font-size:72px;background:var(--ph-bg);color:var(--ph-c)}
+.card .ph img{object-position:center top}
+.card strong{display:block;padding:0 8px;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.3;color:var(--tx)}
+.card small{display:block;padding:0 8px;font-size:15px;line-height:1.5;color:var(--mu)}
+.card strong+small{margin-top:2px}.card small+small{color:var(--tx2);font-weight:600}
+.card .cb{margin:12px 8px 0}
+.card .badge{padding:6px 12px;font-size:14px;border-radius:10px}
+
+/* ---------- 6. 경기남부 자세히 보기 ---------- */
+.gs-bar{margin:0}
+.gs-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
+.gs-btn{height:48px;padding:0 22px;border:1px solid var(--o);background:var(--o);color:#fff;border-radius:16px;font-size:15px;font-weight:700;cursor:pointer}
+.gs-btn:hover{background:#d65f00;border-color:#d65f00}
+.gs-btn.ghost{background:var(--card);border-color:var(--card);color:var(--tx2)}
+.gs-btn.ghost:hover{background:var(--ln);border-color:var(--ln)}
 .gs-btn.map-gs{position:absolute;left:12px;top:64px;z-index:2;height:40px;padding:0 16px;font-size:14px;border-radius:14px;box-shadow:var(--sh)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:8px 14px;border:0;background:var(--card);border-radius:99px;cursor:pointer;font-weight:500;color:var(--tx2)}
+.chip small{color:var(--mu);margin-left:2px}
+.chip:hover{background:var(--ln)}
+.chip.on{background:var(--tx);color:#fff;font-weight:700}.chip.on small{color:rgba(255,255,255,.7)}
+:root[data-theme=dark] .chip.on{color:#191f28}:root[data-theme=dark] .chip.on small{color:rgba(25,31,40,.6)}
+.gs-sec h2{font-size:16px;margin:0 0 8px}.gs-sec h2 small{font-weight:400;font-size:12.5px;margin-left:6px}
+#gsstats{margin:0 0 12px}
+.gs-tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.tile{background:var(--card);border:0;border-radius:18px;padding:14px 16px}
+.tile span{display:block;font-size:12.5px;color:var(--mu)}.tile b{font-size:24px;line-height:1.2}
+.tile span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:var(--dot,#191f28)}
+.tile.chairperson{--dot:#f26b00}.tile.organizing_chair{--dot:#12a37f}.tile.application{--dot:#7c5cf0}.tile.none{--dot:var(--none)}.tile.total{--dot:var(--dot-total)}
+.gs-warn{color:var(--warn);font-size:13px;margin:6px 0 0}
+#gslist{margin-top:16px}#gslist h2{margin-top:18px}#gslist h2:first-child{margin-top:0}
+.gs-scroll{overflow-x:auto;border-radius:18px}
+.gs-table{width:100%;border-collapse:collapse;background:var(--card);border:0;border-radius:18px;font-size:14px}
+.gs-table th,.gs-table td{padding:8px 12px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}
+.gs-table th:first-child{text-align:left}
+.gs-table thead th{background:var(--sf);color:var(--mu);font-weight:600;font-size:13px}
+.gs-table tr.on{background:var(--o-l)}
+.gs-table tfoot th,.gs-table tfoot td{background:var(--sf);font-weight:700;border-bottom:0}
+.link{border:0;background:none;padding:0;color:var(--o-d);font-weight:700;cursor:pointer;text-decoration:underline}
+.gs-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:6px}
+.gs-row{width:100%;display:grid;grid-template-columns:52px minmax(0,1fr) 64px auto;gap:8px;align-items:center;text-align:left;padding:8px 12px;background:var(--card);border:0;border-radius:14px;cursor:pointer}
+.gs-row.on{box-shadow:0 0 0 2px var(--tx)}
+.gs-row .c{color:var(--o-d);font-weight:600;font-size:13px}
+.gs-row .d{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gs-row .n{font-weight:600}
+#map svg .gs-off{display:none}
+#map svg .gs-dim{opacity:.22;pointer-events:none}
+.gs-mode #map svg #sido-borders{display:none}
 
-/* ===== 11차: 다크모드 (html[data-theme=dark]일 때 적용. 값은 common.js·head 스크립트가 시스템 설정/저장된 선택으로 정함) =====
- * 되돌리려면 이 블록 전체를 삭제하세요. 위의 라이트 스타일은 건드리지 않았습니다. */
-:root{color-scheme:light}
-.legend .lg-none{background:#d3d7db}
-:root[data-theme=dark]{--o-d:#ff8a3d;--o-l:#3a2312;--bg:#0f1114;--card:#1a1d22;--sf:#22262c;--tx:#f2f4f6;--tx2:#b0b8c1;--mu:#8b95a1;--ln:#2b3038;--none:#3b424b;--sh:0 2px 12px rgba(0,0,0,.5);color-scheme:dark}/* 헤더 */
-:root[data-theme=dark] .site-header{background:rgba(26,29,34,.86);box-shadow:0 1px 0 rgba(255,255,255,.06)}:root[data-theme=dark] .demo-banner{background:#3a3220;border-bottom-color:#5c4a1c;color:#f3dfa2}/* 흰색으로 고정돼 있던 카드·컨트롤 */
-:root[data-theme=dark] .map-wrap,:root[data-theme=dark] .panel,:root[data-theme=dark] .card,:root[data-theme=dark] .tile,:root[data-theme=dark] .gs-table,:root[data-theme=dark] .gs-row,:root[data-theme=dark] .chip,:root[data-theme=dark] .gs-btn.ghost,:root[data-theme=dark] .toolbar input,:root[data-theme=dark] .toolbar select{background:var(--card)}:root[data-theme=dark] .map-tools button,:root[data-theme=dark] .map-filter select{background:var(--sf);color:var(--tx2)}:root[data-theme=dark] .map-filter select{color:var(--tx)}:root[data-theme=dark] .legend{background:rgba(34,38,44,.94)}:root[data-theme=dark] .legend .lg-none,:root[data-theme=dark] .bar i,:root[data-theme=dark] .tile.none{--dot:var(--none)}:root[data-theme=dark] .legend .lg-none,:root[data-theme=dark] .bar i{background:var(--none)}:root[data-theme=dark] .bar i.chairperson{background:#f26b00}:root[data-theme=dark] .bar i.organizing_chair{background:#12a37f}:root[data-theme=dark] .bar i.application{background:#7c5cf0}:root[data-theme=dark] .tile.total{--dot:#e5e8eb}:root[data-theme=dark] .tile.none{--dot:var(--none)}:root[data-theme=dark] .gs-btn.ghost{border-color:var(--card);color:var(--tx2)}:root[data-theme=dark] .gs-btn.ghost:hover{background:var(--ln);border-color:var(--ln)}:root[data-theme=dark] .gs-btn:hover{background:#d65f00;border-color:#d65f00}:root[data-theme=dark] .chip:hover{background:var(--ln)}:root[data-theme=dark] .chip.on{background:var(--tx);color:#191f28}:root[data-theme=dark] .chip.on small{color:rgba(25,31,40,.6)}:root[data-theme=dark] .tip{background:#3a414a;color:#f2f4f6}:root[data-theme=dark] .card:hover{box-shadow:0 10px 28px rgba(0,0,0,.5)}:root[data-theme=dark] .card .ph{background:var(--sf);color:#5b6573}:root[data-theme=dark] .cv li::before{background:#4e5968}:root[data-theme=dark] .gs-warn{color:#ff8a80}:root[data-theme=dark] .gs-row.on{border-color:var(--tx)}/* 상태 배지 */
-:root[data-theme=dark] .badge{background:#2b3038;color:#b0b8c1}:root[data-theme=dark] .badge.chairperson,:root[data-theme=dark] .badge.appointed{background:rgba(242,107,0,.18);color:#ff9a52}:root[data-theme=dark] .badge.organizing_chair{background:rgba(18,163,127,.18);color:#4fd1a9}:root[data-theme=dark] .badge.application{background:rgba(124,92,240,.22);color:#b3a1ff}:root[data-theme=dark] .badge.organizing{background:rgba(247,189,91,.16);color:#f7bd5b}/* SNS 아이콘: X는 검정 배경이라 어두운 화면에서 묻히므로 밝은 회색 톤으로 */
-:root[data-theme=dark] .sns[data-k=x] .sns-i{background:#3a4049}/* 지도 */
-:root[data-theme=dark] #map svg [data-d]{fill:#2b3037;stroke:var(--card)}:root[data-theme=dark] #map svg .s-chairperson{fill:#f26b00}:root[data-theme=dark] #map svg .s-organizing_chair{fill:#12a37f}:root[data-theme=dark] #map svg .s-application{fill:#7c5cf0}:root[data-theme=dark] #map svg .s-none,:root[data-theme=dark] #map svg .s-unconfirmed{fill:var(--none)}:root[data-theme=dark] #map svg [data-d]:hover{stroke:#f2f4f6}:root[data-theme=dark] #map svg .sel,:root[data-theme=dark] #map svg .sel:hover{stroke:#fff;filter:none}:root[data-theme=dark] #map svg #sido-borders path{stroke:#c3cad3;opacity:.55}
-
-/* ===== 12차: 모바일 대응 =====
- * 되돌리려면 이 블록 전체를 삭제하세요. (JS 쪽 변경은 README 12차 참고) */
-:root{--seg:#fff}
-:root[data-theme=dark]{--seg:#1a1d22}
-.to-map{display:none}
-.panel{scroll-margin-top:68px}.map-wrap{scroll-margin-top:68px}
-
-/* 터치 기기: 확대 전에는 지도 위에서도 페이지가 스크롤되고, 확대하면 지도를 직접 움직임 */
-@media (pointer:coarse){
- #map svg{touch-action:pan-y}#map svg.zoomed{touch-action:none}
- body{-webkit-tap-highlight-color:transparent}
- button,a,select,.chip,.gs-row,.card,.sns{touch-action:manipulation}
-}
-/* 손가락에는 hover가 없으므로 눌렀을 때 hover 효과가 남지 않게 */
-@media (hover:none){
- .tip{display:none!important}
- .card:hover{transform:none;box-shadow:none}
- #map svg [data-d]:not(.sel):hover,:root #map svg [data-d]:not(.sel):hover{stroke:var(--seg);stroke-width:.6}
- :root[data-theme=dark] .card:hover{box-shadow:none}
-}
-
-@media (max-width:860px){
- /* 노치·홈 인디케이터 여백 */
- .site-header{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
- main{padding:12px max(14px,env(safe-area-inset-right)) calc(32px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
- .site-header nav a{min-height:40px;display:inline-flex;align-items:center}
-
- /* 지도: 범례가 지도를 가리지 않도록 지도 아래로, 조작 버튼은 손가락 크기로 */
- .map-wrap{height:auto;min-height:0}
- #map{height:clamp(300px,64vh,560px);height:clamp(300px,64svh,560px)}
- .legend{position:static;margin:0 12px 12px;padding:10px 14px;box-shadow:none;background:var(--sf);flex-direction:row;flex-wrap:wrap;gap:6px 14px;border-radius:14px}
- .map-tools{right:10px;top:10px}.map-tools button{width:44px;height:44px;font-size:20px}
- .map-filter{left:10px;top:10px}.map-filter select{height:44px;padding:0 12px;font-size:16px}
- .gs-btn.map-gs{left:10px;top:64px;height:44px}
-
- /* 상세 패널의 '지도로' 버튼 */
- .panel .to-map{display:inline-flex;align-items:center;height:36px;margin:0 0 14px;padding:0 14px;border:0;border-radius:12px;background:var(--sf);color:var(--tx2);font-weight:700;font-size:14px;cursor:pointer}
-
- /* 목록 화면: 필터를 한 줄에 균등하게 (16px 미만이면 iOS가 입력 때 화면을 확대함) */
- .toolbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
- .toolbar input{grid-column:1/-1;min-width:0;height:50px;font-size:16px}
- .toolbar select{width:100%;min-width:0;height:48px;padding:0 10px;font-size:16px;text-overflow:ellipsis}
-
- /* 경기남부: 도시 칩은 한 줄로 옆으로 밀어서 선택 */
- .gs-ctl{display:block}.gs-ctl .gs-btn{margin-bottom:10px}
- .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px;padding:0 14px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
- .chips::-webkit-scrollbar{display:none}.chip{flex:none;white-space:nowrap;min-height:40px}
-}
-/* 아주 좁은 화면: 로고만 남겨 상단 메뉴가 넘치지 않게 */
-@media (max-width:400px){.brand .t{display:none}}
-
-/* ===== 13차: 다크모드 전환 버튼 ===== */
-.theme-btn{flex:none;width:40px;height:40px;margin-left:2px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:var(--mu);cursor:pointer}
-.theme-btn:hover{background:var(--bg);color:var(--tx)}
-.theme-btn svg{width:20px;height:20px;display:block}
-.theme-btn .i-sun{display:none}
-:root[data-theme=dark] .theme-btn .i-moon{display:none}
-:root[data-theme=dark] .theme-btn .i-sun{display:block}
-.brand .logo-d{display:none}
-:root[data-theme=dark] .brand .logo-l{display:none}
-:root[data-theme=dark] .brand .logo-d{display:block}
-@media (max-width:400px){.site-header nav a{padding:6px 7px}.theme-btn{width:36px}}
-@media (hover:none){.theme-btn:hover{background:transparent;color:var(--mu)}}
-
-/* ===== 14차: 비공식 사이트 안내 팝업 (토스 스타일 바텀시트/카드) + 하단 안내 문구 ===== */
+/* ---------- 7. 비공식 안내 팝업 · 하단 안내 ---------- */
 .site-note{margin:10px 4px 0;max-width:920px;font-size:12.5px;line-height:1.7;color:var(--mu)}.site-note a{color:var(--tx2)}
-.nt-back{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(25,31,40,.56);overscroll-behavior:contain;animation:nt-fade .2s ease}
-:root[data-theme=dark] .nt-back{background:rgba(0,0,0,.66)}
+.site-foot{max-width:1280px;margin:0 auto;padding:20px 20px calc(32px + env(safe-area-inset-bottom));border-top:1px solid var(--ln);text-align:center;font-size:13px;line-height:1.7;color:var(--mu);word-break:keep-all}
+.site-foot .hit{margin-top:12px;text-align:right;line-height:0}.site-foot .hit img{display:inline-block;height:20px;width:auto}
+.site-foot p{margin:0}.site-foot a{color:var(--tx2);font-weight:600;text-underline-offset:2px}.site-foot .nw{white-space:nowrap}.site-foot a:hover{color:var(--o-d)}
+.nt-back{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--scrim);overscroll-behavior:contain;animation:nt-fade .2s ease}
 .nt-back.out{opacity:0;transition:opacity .16s ease}
-.nt{width:100%;max-width:400px;max-height:100%;overflow-y:auto;padding:32px 24px 22px;border-radius:28px;background:#fff;color:var(--tx);box-shadow:0 20px 60px rgba(0,0,0,.25);animation:nt-pop .28s cubic-bezier(.2,.8,.2,1)}
-:root[data-theme=dark] .nt{background:var(--card)}
+.nt{width:100%;max-width:400px;max-height:100%;overflow-y:auto;padding:32px 24px 22px;border-radius:28px;background:var(--card);color:var(--tx);box-shadow:0 20px 60px rgba(0,0,0,.25);animation:nt-pop .28s cubic-bezier(.2,.8,.2,1)}
 .nt-ic{width:56px;height:56px;margin-bottom:18px;border-radius:20px;display:grid;place-items:center;background:var(--o-l);color:var(--o)}
 .nt h2{margin:0 0 8px;font-size:23px;line-height:1.35;font-weight:800;letter-spacing:-.03em;word-break:keep-all}
 .nt-sub{margin:0 0 20px;font-size:16px;line-height:1.55;color:var(--tx2)}
@@ -372,44 +256,81 @@ body{background:var(--bg);color:var(--tx);letter-spacing:-.01em;-webkit-font-smo
 .nt-list li+li{border-top:1px solid var(--ln)}
 .nt-list svg{flex:none;margin-top:1px;color:var(--o)}
 .nt-list a{color:var(--o-d);text-underline-offset:2px;white-space:nowrap}
+.nt-btns{display:grid;grid-template-columns:1.4fr 1fr;gap:8px}
 .nt-ok{display:block;width:100%;height:56px;border:0;border-radius:18px;background:var(--o);color:#fff;font-size:17px;font-weight:800;cursor:pointer;touch-action:manipulation}
 .nt-ok:hover{background:#d65f00}.nt-ok:active{transform:scale(.98)}
+.nt-sk{height:56px;padding:0 8px;border:0;border-radius:18px;background:var(--nt-sk);color:var(--tx2);font-size:15px;font-weight:700;white-space:nowrap;cursor:pointer;touch-action:manipulation}
+.nt-sk:hover{background:var(--nt-sk-h)}.nt-sk:active{transform:scale(.98)}
 @keyframes nt-fade{from{opacity:0}}
 @keyframes nt-pop{from{opacity:0;transform:translateY(14px) scale(.96)}}
 @keyframes nt-up{from{transform:translateY(100%)}}
-@media (max-width:560px){
+
+/* ---------- 8. 반응형 · 터치 · 접근성 ---------- */
+@media(min-width:861px){
+ main.wide{max-width:1400px}
+ .wide .map-layout{grid-template-columns:minmax(0,1fr) 460px}
+ .wide .panel{height:calc(100vh - 210px);min-height:420px;max-height:none;overflow-y:auto}
+ .gs-mode .map-wrap,.gs-mode .wide .panel{height:max(420px,calc(100vh - 330px))}
+}
+@media(max-width:860px){
+ /* 레이아웃 */
+ main{padding:12px max(14px,env(safe-area-inset-right)) calc(32px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+ .map-layout{grid-template-columns:1fr}
+ .map-search{max-width:none}
+ .panel{position:static;max-height:none;overflow:visible;padding:22px 18px}
+ .panel .pcard .profile .ph{width:120px;height:160px}
+ .hero b{font-size:52px}
+ /* 헤더 */
+ .site-header{gap:8px;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+ .brand{gap:6px}.brand .logo{height:22px}.brand span.t{padding-left:8px;font-size:14px}
+ .site-header nav{gap:0}
+ .site-header nav a{min-height:40px;display:inline-flex;align-items:center;white-space:nowrap;padding:6px 8px;font-size:13px}
+ /* 지도: 범례는 지도 아래로, 조작 버튼은 손가락 크기로 */
+ .map-wrap{height:auto;min-height:0}
+ #map{height:clamp(300px,64vh,560px);height:clamp(300px,64svh,560px)}
+ .legend{position:static;margin:0 12px 12px;padding:10px 14px;box-shadow:none;background:var(--sf);flex-direction:row;gap:6px 14px;border-radius:14px}
+ .map-tools{right:10px;top:10px}.map-tools button{width:44px;height:44px;font-size:20px}
+ .map-filter{left:10px;top:10px}.map-filter select{height:44px;padding:0 12px;font-size:16px}
+ .gs-btn.map-gs{left:10px;top:64px;height:44px}
+ .panel .to-map{display:inline-flex;align-items:center;height:36px;margin:0 0 14px;padding:0 14px;border:0;border-radius:12px;background:var(--sf);color:var(--tx2);font-weight:700;font-size:14px;cursor:pointer}
+ /* 목록: 필터는 한 줄 3칸 (16px 미만이면 iOS가 입력 때 화면을 확대함) */
+ .toolbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .toolbar input{grid-column:1/-1;min-width:0;height:50px;font-size:16px}
+ .toolbar select{width:100%;min-width:0;height:48px;padding:0 10px;font-size:16px;text-overflow:ellipsis}
+ /* 경기남부 */
+ .gs-tiles{grid-template-columns:repeat(2,1fr)}.tile.total{grid-column:1/-1}
+ .gs-list{grid-template-columns:1fr}
+ .gs-row{grid-template-columns:48px minmax(0,1fr) auto;grid-template-areas:'c d b' 'c n b';row-gap:0}
+ .gs-row .c{grid-area:c}.gs-row .d{grid-area:d}.gs-row .n{grid-area:n;font-size:13px}.gs-row .badge{grid-area:b}
+ .gs-table th,.gs-table td{padding:7px 6px;font-size:12.5px}.gs-table thead th{font-size:11.5px}
+ .gs-ctl{display:block}.gs-ctl .gs-btn{margin-bottom:10px}
+ .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px;padding:0 14px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .chips::-webkit-scrollbar{display:none}.chip{flex:none;white-space:nowrap;min-height:40px}
+}
+@media(max-width:560px){
+ .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+ .card{padding:8px 8px 16px;border-radius:22px}
+ .card .ph{border-radius:16px;font-size:48px}
+ .card strong{font-size:18px;padding:0 6px}.card small{font-size:13px;padding:0 6px}.card .cb{margin:10px 6px 0}
+ .page-title{font-size:26px}.toolbar input{flex-basis:100%}
  .nt-back{align-items:flex-end;padding:0}
  .nt{max-width:none;border-radius:28px 28px 0 0;padding:28px 22px calc(20px + env(safe-area-inset-bottom));animation:nt-up .3s cubic-bezier(.2,.8,.2,1)}
 }
-@media (prefers-reduced-motion:reduce){.nt-back,.nt{animation:none}}
-
-/* 14차 추가: 팝업 버튼 2개 (오늘은 다시 보지 않기 / 확인했어요) */
-.nt-btns{display:grid;grid-template-columns:1.4fr 1fr;gap:8px}
-.nt-sk{height:56px;padding:0 8px;border:0;border-radius:18px;background:#f2f4f6;color:var(--tx2);font-size:15px;font-weight:700;white-space:nowrap;cursor:pointer;touch-action:manipulation}
-.nt-sk:hover{background:#e5e8eb}.nt-sk:active{transform:scale(.98)}
-:root[data-theme=dark] .nt-sk{background:#2b3038}:root[data-theme=dark] .nt-sk:hover{background:#343a43}
-@media (hover:none){.nt-sk:hover{background:#f2f4f6}:root[data-theme=dark] .nt-sk:hover{background:#2b3038}.nt-ok:hover{background:var(--o)}}
-
-/* 15차 추가: 하단 문의 안내 (다크모드는 변수로 자동 대응) */
-.site-foot{max-width:1280px;margin:0 auto;padding:20px 20px calc(32px + env(safe-area-inset-bottom));border-top:1px solid var(--ln);text-align:center;font-size:13px;line-height:1.7;color:var(--mu);word-break:keep-all}
-.site-foot p{margin:0}.site-foot a{color:var(--tx2);font-weight:600;text-underline-offset:2px;}.site-foot .nw{white-space:nowrap}.site-foot a:hover{color:var(--o-d)}
-
-/* 16차 추가: 관할지역 */
-.area{margin:6px 0 0;font-size:13px;line-height:1.65;color:var(--tx2);word-break:keep-all}
-.area b{display:block;margin-bottom:1px;font-size:12px;font-weight:700;color:var(--mu)}
-
-/* 17차: 관할지역 한 줄 + 더보기 */
-.area-row{display:flex;align-items:baseline;gap:8px}
-.area-t{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.area.open .area-t{white-space:normal;overflow:visible;text-overflow:clip}.area.open .area-row{align-items:flex-start}
-.area-more{flex:none;border:0;background:none;padding:0;font:inherit;font-size:12.5px;font-weight:700;color:var(--o-d);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-.area-more[hidden]{display:none}
-
-/* 18차: 라벨과 내용을 한 줄에 (공간 절약) */
-.area b{display:inline;flex:none;margin:0;font-size:12.5px;white-space:nowrap}
-.area-row{gap:10px}.area-row b{align-self:baseline}
-
-/* 19차: 스레드·홈페이지 아이콘 색 */
-.sns[data-k=threads] .sns-i{background:#191f28}
-.sns[data-k=site] .sns-i{background:#f26b00}
-:root[data-theme=dark] .sns[data-k=threads] .sns-i{background:#3a4049}
+@media(max-width:400px){
+ .brand .t{display:none}
+ .site-header nav a{padding:6px 7px}.theme-btn{width:36px}
+}
+@media(pointer:coarse){
+ #map svg{touch-action:pan-y}#map svg.zoomed{touch-action:none}
+ body{-webkit-tap-highlight-color:transparent}
+ button,a,select,.chip,.gs-row,.card,.sns{touch-action:manipulation}
+}
+/* 손가락에는 hover가 없으므로 눌렀을 때 hover 효과가 남지 않게 */
+@media(hover:none){
+ .tip{display:none!important}
+ .card:hover{transform:none;box-shadow:none}
+ #map svg [data-d]:not(.sel):hover{stroke:var(--card);stroke-width:.6}
+ .theme-btn:hover{background:transparent;color:var(--mu)}
+ .nt-sk:hover{background:var(--nt-sk)}.nt-ok:hover{background:var(--o)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.nt-back,.nt{animation:none}}
