@@ -58,7 +58,7 @@ main{max-width:1280px;margin:0 auto;padding:16px 20px 40px}
 :root[data-theme=dark] .demo-banner{background:#3a3220;border-bottom-color:#5c4a1c;color:#f3dfa2}
 
 /* ---------- 3. 지도 ---------- */
-.map-layout{display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start}
+.map-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
 .map-wrap{position:relative;background:var(--card);border:0;border-radius:var(--rl);height:calc(100vh - 210px);min-height:420px;overflow:hidden;scroll-margin-top:68px}
 #map{width:100%;height:100%}
 #map svg{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
@@ -103,7 +103,7 @@ main{max-width:1280px;margin:0 auto;padding:16px 20px 40px}
 .ms-more,.ms-none{padding:10px 12px;font-size:13px;color:var(--mu)}
 
 /* ---------- 4. 우측 패널 · 인물 상세 ---------- */
-.panel{background:var(--card);border:0;border-radius:var(--rl);padding:20px;position:sticky;top:72px;max-height:calc(100vh - 90px);overflow-y:auto;scroll-margin-top:68px}
+.panel{min-width:0;background:var(--card);border:0;border-radius:var(--rl);padding:20px;position:sticky;top:72px;max-height:calc(100vh - 90px);overflow-y:auto;scroll-margin-top:68px}
 .wide .panel{padding:24px 26px 20px;font-size:15px}
 .detail{max-width:640px;margin:0 auto}
 .panel .sido{display:block;font-size:14px;font-weight:600;color:var(--o-d)}
@@ -170,9 +170,9 @@ main{max-width:1280px;margin:0 auto;padding:16px 20px 40px}
 .sns[data-k=site] .sns-i{background:#f26b00}
 
 /* 관할지역 (한 줄 + 더보기) */
-.area{margin:6px 0 0;font-size:13px;line-height:1.65;color:var(--tx2);word-break:keep-all}
+.area{min-width:0;max-width:100%;margin:6px 0 0;font-size:13px;line-height:1.65;color:var(--tx2);word-break:keep-all}
 .area b{display:inline;flex:none;margin:0;font-size:12.5px;font-weight:700;color:var(--mu);white-space:nowrap}
-.area-row{display:flex;align-items:baseline;gap:10px}.area-row b{align-self:baseline}
+.area-row{min-width:0;display:flex;align-items:baseline;gap:10px}.area-row b{align-self:baseline}
 .area-t{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .area.open .area-t{white-space:normal;overflow:visible;text-overflow:clip}.area.open .area-row{align-items:flex-start}
 .area-more{flex:none;border:0;background:none;padding:0;font:inherit;font-size:12.5px;font-weight:700;color:var(--o-d);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
@@ -275,7 +275,7 @@ main{max-width:1280px;margin:0 auto;padding:16px 20px 40px}
 @media(max-width:860px){
  /* 레이아웃 */
  main{padding:12px max(14px,env(safe-area-inset-right)) calc(32px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
- .map-layout{grid-template-columns:1fr}
+ .map-layout{grid-template-columns:minmax(0,1fr)}
  .map-search{max-width:none}
  .panel{position:static;max-height:none;overflow:visible;padding:22px 18px}
  .panel .pcard .profile .ph{width:120px;height:160px}
