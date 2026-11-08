@@ -1,0 +1,2 @@
+{"_meta":{"note":"선거구 목록은 data/map/22_Elec_SGG.csv에서 자동 생성됩니다. 이 파일에는 상태를 지정할 선거구만 SGG_Code 기준으로 추가하세요. status: appointed|vacant|organizing (미지정 시 unconfirmed)","example":{"id":"2110101","status":"vacant"},"test":false},
+ "districts":[]}

@@ -1,0 +1,7 @@
+{"_meta":{"test":true},"districts":[
+{"id":"test-a","sido":"서울특별시","name":"테스트구 갑","status":"appointed"},
+{"id":"test-b","sido":"서울특별시","name":"테스트구 을","status":"vacant"},
+{"id":"test-c","sido":"경기도","name":"샘플시 갑","status":"organizing"},
+{"id":"test-d","sido":"경기도","name":"샘플시 을","status":"unconfirmed"},
+{"id":"test-e","sido":"부산광역시","name":"예시구","status":"appointed"},
+{"id":"test-f","sido":"제주특별자치도","name":"견본시","status":"unconfirmed"}]}

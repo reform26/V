@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><g id="districts">
+<rect id="test-a" x="10" y="10" width="90" height="90"/><rect id="test-b" x="105" y="10" width="90" height="90"/>
+<rect id="test-c" x="200" y="10" width="90" height="90"/><rect id="test-d" x="10" y="105" width="90" height="85"/>
+<rect id="test-e" x="105" y="105" width="90" height="85"/><rect id="test-f" x="200" y="105" width="90" height="85"/></g></svg>
