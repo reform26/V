@@ -31,6 +31,6 @@
   const{p,d}=x;
   /* 탭 제목·검색 결과·북마크에 인물이 드러나도록 제목을 인물별로 설정 (예: 정찬옥 · 서울 중구·성동구 갑 당협위원장 | 개혁신당 당협위원장 현황) */
   document.title=`${p.name} · ${[p.region||'',dname(x)].filter(Boolean).join(' ')} ${RFData.STATUS[p.status]||p.statusLabel||''}`.replace(/\s+$/,'')+' | '+SITE;
-  box.innerHTML=`<span class="sido">${esc(d.sido)}</span><h2>${esc(dname(x))}</h2>${areaHtml(p.districtId)}`+personDetailHtml(p,d)+`<p><a href="people.html${q?'?demo=1':''}" style="color:var(--o-d)">목록으로</a></p>`;
+  box.innerHTML=`<span class="sido">${esc(d.sido)}</span><h2>${esc(dname(x))}</h2>${areaHtml(p.districtId)}`+personDetailHtml(p,d)+(window.voteHtml?window.voteHtml(p):'')+`<p><a href="people.html${q?'?demo=1':''}" style="color:var(--o-d)">목록으로</a></p>`;
  }
 })();
