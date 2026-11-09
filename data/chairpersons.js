@@ -5,9 +5,9 @@ window.RF_FALLBACK['data/chairpersons.json']={
   "note": "조직 현황 데이터. status: chairperson(당협위원장) | organizing_chair(조직위원장) | application(조직위 신청). sggCode는 지도 데이터의 SGG_Code, sggName은 대조용 CSV 선거구명. 인사 변경 시 이 파일만 수정",
   "expectedCounts": {
    "chairperson": 13,
-   "organizing_chair": 5,
+   "organizing_chair": 6,
    "application": 1,
-   "total": 19
+   "total": 20
   },
   "test": false
  },
@@ -629,6 +629,45 @@ window.RF_FALLBACK['data/chairpersons.json']={
     {
      "label": "유튜브",
      "url": "https://youtube.com/channel/UC3-CpPJnxTWi0oLAlNs7GRw?si=-YVfD0oAizDhXgxX"
+    }
+   ]
+  },
+  {
+   "personId": "person_020",
+   "name": "우성원",
+   "region": "대구",
+   "districtName": "달성군",
+   "status": "organizing_chair",
+   "statusLabel": "조직위원장",
+   "sggCode": "2270801",
+   "sggName": "대구 달성군",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "전) 달성군 당협위원장",
+    "전) 달성군4-H연합회장",
+    "제21대 대통령선거 중앙선대위 일정기획단 부단장",
+    "ROTC 장교 (육군 중위) 전역"
+   ],
+   "activities": [],
+   "photo": "https://i.imgur.com/Bi2Owdi.png",
+   "age": 35,
+   "sns": [
+    {
+     "label": "페이스북",
+     "url": "https://www.facebook.com/seongwon.woo.3/"
+    },
+    {
+     "label": "인스타그램",
+     "url": "https://www.instagram.com/seongwon._.farm"
+    },
+    {
+     "label": "유튜브",
+     "url": "https://www.youtube.com/channel/UCL2JP6XXtMkhrA9WG3U3XPA"
+    },
+    {
+     "label": "홈페이지",
+     "url": "https://litt.ly/seongwon._.farm"
     }
    ]
   }
