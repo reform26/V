@@ -5,7 +5,8 @@ let _rfReady;window.RFMapReady=new Promise(r=>_rfReady=r);
  const D=await RFData.load(),panel=document.getElementById('panel'),tip=document.getElementById('tip');
  let svg,view,orig,base,selected=null,moved=false,drag=null,homeFn=null,onSelect=null;const els=new Map();
  const dq=RFData.demo?'&demo=1':'';
- function home(){const n={};Object.keys(RFData.STATUS).forEach(k=>n[k]=D.persons.filter(p=>p.status===k).length);
+ function home(){homeBase();if(window.RFHeat)RFHeat.home(panel)} /* 득표율 모드(heat.js)가 패널 내용을 바꿀 수 있게 하는 연결점 */
+ function homeBase(){const n={};Object.keys(RFData.STATUS).forEach(k=>n[k]=D.persons.filter(p=>p.status===k).length);
   if(homeFn)return homeFn();
   const tot=D.persons.length,K=Object.keys(RFData.STATUS);
   panel.innerHTML=`<span class="sido">개혁신당</span><h2>당협 조직 현황</h2><p class="muted home-hint">지도에서 선거구를 선택하면 상세 정보가 보여요.</p>
@@ -14,7 +15,8 @@ let _rfReady;window.RFMapReady=new Promise(r=>_rfReady=r);
   <div class="stat">${K.map(k=>`<span><span class="badge ${k}">${RFData.STATUS[k]}</span></span><b>${n[k]}</b>`).join('')}</div>
   <p class="muted note">회색 선거구는 등록된 정보가 없는 곳입니다. 공석이나 미임명을 뜻하지 않습니다.</p>
   ${D.ok?'':'<p class="muted">선거구 데이터를 불러오지 못했습니다.</p>'}${D.report.errors.length?`<p class="gs-warn">조직 현황 검증 오류 ${D.report.errors.length}건: ${esc(D.report.errors[0])}</p>`:''}`}
- function detail(id){
+ function detail(id){detailBase(id);if(window.RFHeat)RFHeat.detail(id,panel)}
+ function detailBase(id){
   const d=D.dMap.get(id),ps=D.psByD.get(id)||[];
   if(!d){panel.innerHTML=`<h2>${esc(id)}</h2><p class="muted">지도에는 있으나 선거구 목록에 없는 코드입니다.</p>`;return}
   let h=`<button type="button" class="to-map">← 지도로</button><span class="sido">${esc(d.sido)}</span><h2>${esc(d.name)}</h2>${areaHtml(id)}`;
@@ -80,7 +82,7 @@ let _rfReady;window.RFMapReady=new Promise(r=>_rfReady=r);
  svg.querySelectorAll('[id]').forEach(e=>{if(byS.has(e.id)){const id=byS.get(e.id);e.setAttribute('data-d',id);els.set(id,e);e.classList.add('s-'+D.status(id))}});
  const miss=D.districts.filter(d=>!els.has(d.id)).map(d=>d.id);
  if(miss.length)console.warn(`[지도] SVG에서 찾지 못한 선거구 ${miss.length}개:`,miss);
- const label=id=>{const d=D.dMap.get(id),p=D.pByD.get(id);return `<b>${esc(d.name)}</b><br>${p?esc(p.name)+' · '+esc(RFData.STATUS[p.status]||''):RFData.NONE_LABEL}`};
+ const label=id=>{const d=D.dMap.get(id),p=D.pByD.get(id);return `<b>${esc(d.name)}</b><br>${p?esc(p.name)+' · '+esc(RFData.STATUS[p.status]||''):RFData.NONE_LABEL}${window.RFHeat?RFHeat.tip(id):''}`};
  svg.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const t=e.target.closest('[data-d]');
   if(t&&!moved){tip.innerHTML=label(t.dataset.d);tip.style.display='block';tip.style.left=Math.min(e.clientX+14,innerWidth-250)+'px';tip.style.top=e.clientY+14+'px'}else tip.style.display='none'});
  svg.addEventListener('pointerleave',()=>tip.style.display='none');
