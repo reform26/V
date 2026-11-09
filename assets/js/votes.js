@@ -65,6 +65,6 @@
   if(!bl.length)return '';
   const date=V.meta&&V.meta.generatedAt?` · ${e(V.meta.generatedAt)} 기준`:'';
   return `<section class="vt"><h3>개혁신당 · 후보자 득표율</h3>${bl.map((b,i)=>block(i===0,b[0],b[1],b[2],b[3],b[4])).join('')}
-   <p class="vt-foot">2026 지방선거 개표 결과(reform26/election)를 이 선거구 관할지역에 맞춰 계산한 참고용 수치이며 공식 결과와 다를 수 있습니다${date}.</p></section>`;
+   ${V.bySgg&&V.bySgg[id]&&V.bySgg[id].gw?`<p class="vt-note"><a href="dong.html?sgg=${e(id)}">이 선거구 읍면동별 득표 지도 보기 →</a></p>`:''}<p class="vt-foot">2026 지방선거 개표 결과(reform26/election)를 이 선거구 관할지역에 맞춰 계산한 참고용 수치이며 공식 결과와 다를 수 있습니다${date}.</p></section>`;
  };
 })();
