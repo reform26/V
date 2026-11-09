@@ -640,7 +640,7 @@ window.RF_FALLBACK['data/chairpersons.json']={
    "status": "organizing_chair",
    "statusLabel": "조직위원장",
    "sggCode": "2270801",
-   "sggName": "대구 달성군",
+   "sggName": "대구 달성",
    "party": "개혁신당",
    "education": [],
    "career": [
