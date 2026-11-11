@@ -3,8 +3,8 @@
   "note": "조직 현황 데이터. status: chairperson(당협위원장) | organizing_chair(조직위원장) | application(조직위 신청). sggCode는 지도 데이터의 SGG_Code, sggName은 대조용 CSV 선거구명. 인사 변경 시 이 파일만 수정",
   "expectedCounts": {
    "chairperson": 13,
-   "organizing_chair": 6,
-   "application": 1,
+   "organizing_chair": 7,
+   "application": 0,
    "total": 20
   },
   "test": false
@@ -502,8 +502,8 @@
    "photo": "https://i.imgur.com/0KPEbjZ.png",
    "region": "경기",
    "districtName": "용인시 병",
-   "status": "application",
-   "statusLabel": "조직위 신청",
+   "status": "organizing_chair",
+   "statusLabel": "조직위원장",
    "sggCode": "2413602",
    "sggName": "경기 용인병",
    "party": "개혁신당",
