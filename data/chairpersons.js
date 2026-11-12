@@ -4,10 +4,10 @@ window.RF_FALLBACK['data/chairpersons.json']={
  "_meta": {
   "note": "조직 현황 데이터. status: chairperson(당협위원장) | organizing_chair(조직위원장) | application(조직위 신청). sggCode는 지도 데이터의 SGG_Code, sggName은 대조용 CSV 선거구명. 인사 변경 시 이 파일만 수정",
   "expectedCounts": {
-   "chairperson": 13,
+   "chairperson": 14,
    "organizing_chair": 7,
    "application": 0,
-   "total": 20
+   "total": 21
   },
   "test": false
  },
@@ -435,6 +435,36 @@ window.RF_FALLBACK['data/chairpersons.json']={
     {
      "label": "블로그",
      "url": "https://blog.naver.com/h375/"
+    }
+   ]
+  },
+  {
+   "personId": "person_021",
+   "name": "송창훈",
+   "photo": "https://i.imgur.com/czv11rh.png",
+   "region": "경기",
+   "districtName": "용인시 정",
+   "status": "chairperson",
+   "statusLabel": "당협위원장",
+   "sggCode": "2413702",
+   "sggName": "경기 용인정",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "개혁신당 중앙당 대변인",
+    "용인시 정 당협위원장",
+    "현) 가천대학교 기계공학부 겸임교수"
+   ],
+   "activities": [],
+   "age": 31,
+   "sns": [
+    {
+     "label": "페이스북",
+     "url": "https://www.facebook.com/profile.php?id=100004103197128"
+    },
+    {
+     "label": "인스타그램",
+     "url": "https://www.instagram.com/song_c_h_/"
     }
    ]
   },
