@@ -5,9 +5,9 @@ window.RF_FALLBACK['data/chairpersons.json']={
   "note": "조직 현황 데이터. status: chairperson(당협위원장) | organizing_chair(조직위원장) | application(조직위 신청). sggCode는 지도 데이터의 SGG_Code, sggName은 대조용 CSV 선거구명. 인사 변경 시 이 파일만 수정",
   "expectedCounts": {
    "chairperson": 14,
-   "organizing_chair": 7,
+   "organizing_chair": 11,
    "application": 0,
-   "total": 21
+   "total": 25
   },
   "test": false
  },
@@ -452,7 +452,8 @@ window.RF_FALLBACK['data/chairpersons.json']={
    "education": [],
    "career": [
     "개혁신당 중앙당 대변인",
-    "용인시 정 당협위원장",
+    "경기도당 수석 부위원장",
+   "용인시 정 당협위원장",
     "현) 가천대학교 기계공학부 겸임교수"
    ],
    "activities": [],
@@ -676,8 +677,8 @@ window.RF_FALLBACK['data/chairpersons.json']={
    "career": [
     "전) 달성군 당협위원장",
     "전) 달성군4-H연합회장",
-    "제21대 대통령선거 중앙선대위 일정기획단 부단장",
-    "ROTC 장교 (육군 중위) 전역"
+   "제21대 대통령선거 중앙선대위 일정기획단 부단장",
+   "ROTC 장교 (육군 중위) 전역"
    ],
    "activities": [],
    "photo": "https://i.imgur.com/Bi2Owdi.png",
@@ -700,6 +701,98 @@ window.RF_FALLBACK['data/chairpersons.json']={
      "url": "https://litt.ly/seongwon._.farm"
     }
    ]
+  },
+  {
+   "personId": "person_022",
+   "name": "문인수",
+   "photo": "https://i.imgur.com/aMOavQv.png",
+   "region": "경기",
+   "districtName": "안산시 갑",
+   "status": "organizing_chair",
+   "statusLabel": "조직위원장",
+   "sggCode": "2411803",
+   "sggName": "경기 안산갑",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "경기도당 부위원장",
+   "제5대 안산시의회 의원",
+    "현) (사)안산시 의정회 부회장",
+    "문건축사사무소 대표"
+   ],
+   "activities": [],
+   "age": 60,
+   "sns": [
+    {
+     "label": "페이스북",
+     "url": "https://www.facebook.com/profile.php?id=100001844357534"
+    }
+   ]
+  },
+  {
+   "personId": "person_023",
+   "name": "이윤용",
+   "photo": "",
+   "region": "경기",
+   "districtName": "김포시 갑",
+   "status": "organizing_chair",
+   "statusLabel": "조직위원장",
+   "sggCode": "2413902",
+   "sggName": "경기 김포갑",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "현) 몰렉스코리아 책임연구원"
+   ],
+   "activities": []
+  },
+  {
+   "personId": "person_024",
+   "name": "안만규",
+   "photo": "https://i.imgur.com/dtbQy8V.png",
+   "region": "경기",
+   "districtName": "남양주시 을",
+   "status": "organizing_chair",
+   "statusLabel": "조직위원장",
+   "sggCode": "2412602",
+   "sggName": "경기 남양주을",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "전) 남양주시 을 당협위원장",
+    "경기도당 윤리위원장",
+    "(주)남주건설 대표이사"
+   ],
+   "activities": [],
+   "age": 71,
+   "sns": [
+    {
+     "label": "페이스북",
+     "url": "https://www.facebook.com/mankyu1021"
+    },
+    {
+     "label": "블로그",
+     "url": "https://blog.naver.com/mankyu1022"
+    }
+   ]
+  },
+  {
+   "personId": "person_025",
+   "name": "오나리",
+   "photo": "https://i.imgur.com/Ua1CHWx.png",
+   "region": "경기",
+   "districtName": "수원시 무",
+   "status": "organizing_chair",
+   "statusLabel": "조직위원장",
+   "sggCode": "2410202",
+   "sggName": "경기 수원무",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "전) 수원갑 정희윤 후보 AI홍보위원장"
+   ],
+   "activities": [],
+   "age": 46
   }
  ]
 };

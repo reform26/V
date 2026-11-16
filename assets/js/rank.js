@@ -1,6 +1,6 @@
 /* 공략 우선순위("골든 선거구") 순위: 경기남부 선거구를 항목별 가중치 점수로 줄 세우는 보기. 경기남부 자세히 보기(gs-mode)에서만 나타납니다.
  * 데이터: 득표율=data/vote-results.js(gw.rate) · 인구=data/pop-data.js(1세 단위, tools/build-pop-data.js) · 위원장=RFData(chairpersons.json)
- * - 점수 = Σ(가중치 × 항목 점수) ÷ Σ가중치 × 100. 항목 점수는 경기남부 21곳 안에서의 순위(백분위, 0~1)라 극단값 하나가 전체를 흔들지 않습니다.
+ * - 점수 = Σ(가중치 × 항목 점수) ÷ Σ가중치 × 100. 항목 점수는 경기남부 ${rows.length}곳 안에서의 순위(백분위, 0~1)라 극단값 하나가 전체를 흔들지 않습니다.
  * - 위원장 공석 항목만 순위가 아니라 단계값(등록 없음 1 · 조직위 신청 .5 · 조직위원장 .25 · 당협위원장 0)을 씁니다.
  * - 항목·연령층·프리셋은 아래 METRICS/AGES/PRESETS 만 고치면 됩니다. 슬라이더 값은 주소창(?rk=…)에 담겨 링크로 공유됩니다. */
 (function(){
@@ -112,7 +112,7 @@
   el.innerHTML=`<h2>공략 우선순위 <small class="muted">골든 선거구 · 경기남부 ${rows.length}곳 중 ${list.length}곳${city()?' · '+esc(city()):''}</small></h2>
    <details class="rk-ctl"${isOpen?' open':''}><summary>가중치·필터 조절</summary>${controlsHtml()}</details>
    <div id="rktable">${tableHtml(list,all)}</div>
-   <p class="muted note">점수는 경기남부 21곳 안에서의 상대 순위를 가중 평균한 값이라 절대적 의미는 없고 비교용입니다. 득표율은 2026 지방선거 광역비례 결과를 관할 행정동에 맞춰 합산한 참고 수치이고, 인구는 ${esc(P.meta.source)} 기준입니다. ‘등록된 위원장 없음’은 공석을 뜻하지 않고 이 사이트에 등록된 정보가 없다는 뜻이며, 학부모층은 나이로 추정한 값입니다.${missing.length?` 자료 누락: ${missing.join(', ')}`:''}</p>`;
+   <p class="muted note">점수는 경기남부 ${rows.length}곳 안에서의 상대 순위를 가중 평균한 값이라 절대적 의미는 없고 비교용입니다. 득표율은 2026 지방선거 광역비례 결과를 관할 행정동에 맞춰 합산한 참고 수치이고, 인구는 ${esc(P.meta.source)} 기준입니다. ‘등록된 위원장 없음’은 공석을 뜻하지 않고 이 사이트에 등록된 정보가 없다는 뜻이며, 학부모층은 나이로 추정한 값입니다.${missing.length?` 자료 누락: ${missing.join(', ')}`:''}</p>`;
   if(fid){const n=$(fid);if(n)n.focus()}
   paintMap(all);sync()}
  /* 슬라이더를 움직일 때는 표와 숫자만 갱신(슬라이더 자체를 다시 그리면 드래그가 끊기므로) */

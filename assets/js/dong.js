@@ -33,7 +33,7 @@
   const onKey=e=>{if(e.key==='Escape')close()},close=()=>{ov.remove();document.removeEventListener('keydown',onKey);document.body.style.overflow=''};
   if(!o.page){document.addEventListener('keydown',onKey);document.body.style.overflow='hidden';$('.x').onclick=close}
   let D;try{D=await load()}catch(e){DATA=null;info.textContent='데이터를 불러오지 못했습니다: '+e.message+' — data/dong-map.js 가 사이트에 함께 올라갔는지 확인하세요.';return}
-  const F=D.F,meta=D.meta,sidos=[...new Set(F.map(f=>f.properties.s))],SOUTH=((window.RF_REGIONS||{}).gyeonggiSouth||{cities:[]}).cities.map(c=>c.stem);
+  const F=D.F,meta=D.meta,sidos=[...new Set(F.map(f=>f.properties.s))],SOUTHC=((window.RF_REGIONS||{}).gyeonggiSouth||{cities:[]}).cities,inSouth=(cs,f)=>cs.some(c=>c.districts.some(d=>String(d.sggCode)===f.properties.d)||(c.extraDongs||[]).includes(f.properties.n));
   let sgg=o.sgg||'',south=!!o.south,sel=null;
   if(sgg){const f=F.find(f=>f.properties.d===sgg);o.sido=f?f.properties.s:o.sido}
   $('.s').innerHTML=sidos.map(s=>`<option>${s}</option>`).join('');$('.s').value=sidos.includes(o.sido)?o.sido:(south?'경기':'경기');
@@ -46,7 +46,7 @@
    svg.querySelectorAll('path').forEach(e=>e.classList.toggle('on',e.dataset.c===p.c))};
   function draw(){
    const s=$('.s').value,c=$('.c').value,m=$('.m').value,gap=$('.g').checked;let fs=F.filter(f=>f.properties.s===s);
-   if(sgg)fs=fs.filter(f=>f.properties.d===sgg);else if(c)fs=fs.filter(f=>f.properties.g===c);else if(south)fs=fs.filter(f=>SOUTH.some(t=>f.properties.g.startsWith(t)));
+   if(sgg)fs=fs.filter(f=>f.properties.d===sgg);else if(c)fs=fs.filter(f=>f.properties.g===c);else if(south)fs=fs.filter(f=>inSouth(SOUTHC,f));
    const nm=window.RFData&&sgg&&RFMap&&RFMap.D.dMap.get(sgg);
    $('b').textContent=sgg?`${dName(sgg,s)} — 읍면동별 득표율 (${fs.length}개 동)`:south&&!c?'경기남부 — 읍면동별 득표율':'읍면동별 득표율 (2026 지방선거 광역비례)';
    const r=svg.getBoundingClientRect(),w=Math.max(r.width,320),h=Math.max(r.height,320);const T=d3.geoTransform({point(x,y){const q=mer(x,y);this.stream.point(q[0],q[1])}}),bb=d3.geoPath(T).bounds({type:'FeatureCollection',features:fs}),
@@ -89,7 +89,7 @@
    gapOn=()=>{const c=wrap.querySelector('#mmopts [data-o=gap]');return !!(c&&c.checked)&&heatMode()==='vote'};
   const gsOn=()=>$('gsctl')&&!$('gsctl').hidden,gsCity=()=>{const c=$('gschips')&&$('gschips').querySelector('.chip.on');return c?c.dataset.city:''};
   const scoped=()=>{let fs=F;
-   if(gsOn()){const cs=((window.RF_REGIONS||{}).gyeonggiSouth||{cities:[]}).cities,c=gsCity(),stems=(c?cs.filter(x=>x.name===c):cs).map(x=>x.stem);fs=F.filter(f=>f.properties.s==='경기'&&stems.some(t=>f.properties.g.startsWith(t)))}
+   if(gsOn()){const cs=((window.RF_REGIONS||{}).gyeonggiSouth||{cities:[]}).cities,c=gsCity(),sel=(c?cs.filter(x=>x.name===c):cs);fs=F.filter(f=>f.properties.s==='경기'&&inSouth(sel,f))}
    else{const v=($('sido')||{}).value||'';if(v)fs=F.filter(f=>v.startsWith(f.properties.s)||f.properties.s.startsWith(v))}
    return only?fs.filter(f=>f.properties.d===only):fs};
   const scopeLabel=()=>gsOn()?(gsCity()||'경기남부'):(($('sido')||{}).value||'전국');
