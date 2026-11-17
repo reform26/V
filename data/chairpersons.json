@@ -2,10 +2,10 @@
  "_meta": {
   "note": "조직 현황 데이터. status: chairperson(당협위원장) | organizing_chair(조직위원장) | application(조직위 신청). sggCode는 지도 데이터의 SGG_Code, sggName은 대조용 CSV 선거구명. 인사 변경 시 이 파일만 수정",
   "expectedCounts": {
-   "chairperson": 14,
+   "chairperson": 15,
    "organizing_chair": 11,
    "application": 0,
-   "total": 25
+   "total": 26
   },
   "test": false
  },
@@ -437,33 +437,73 @@
    ]
   },
   {
-   "personId": "person_021",
-   "name": "송창훈",
-   "photo": "https://i.imgur.com/czv11rh.png",
-   "region": "경기",
-   "districtName": "용인시 정",
+   "personId": "person_017",
+   "name": "조동운",
+   "region": "대전",
+   "districtName": "서구 갑",
    "status": "chairperson",
    "statusLabel": "당협위원장",
-   "sggCode": "2413702",
-   "sggName": "경기 용인정",
+   "sggCode": "2300301",
+   "sggName": "대전 서구갑",
    "party": "개혁신당",
    "education": [],
    "career": [
-    "개혁신당 중앙당 대변인",
-    "경기도당 수석 부위원장",
-   "용인시 정 당협위원장",
-    "현) 가천대학교 기계공학부 겸임교수"
+    "대전광역시당 위원장 직무대행",
+    "서구 갑 당협위원장",
+    "전) 경찰대학 경찰학과 교수",
+    "한국경찰연구원 원장",
+    "법학박사"
    ],
    "activities": [],
-   "age": 31,
+   "photo": "https://i.imgur.com/q8Z5Mst.png",
+   "age": 64,
    "sns": [
     {
      "label": "페이스북",
-     "url": "https://www.facebook.com/profile.php?id=100004103197128"
+     "url": "https://www.facebook.com/c2716898"
     },
     {
      "label": "인스타그램",
-     "url": "https://www.instagram.com/song_c_h_/"
+     "url": "https://www.instagram.com/c2716898/"
+    }
+   ]
+  },
+  {
+   "personId": "person_026",
+   "name": "전성균",
+   "photo": "https://i.imgur.com/gc9TjpX.png",
+   "region": "경기",
+   "districtName": "화성시 정",
+   "status": "chairperson",
+   "statusLabel": "당협위원장",
+   "sggCode": "2414902",
+   "sggName": "경기 화성정",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "전) 제9대 화성시의원",
+    "개혁신당 사무총장",
+    "화성시 정 당협위원장",
+    "전) 개혁신당 최고위원",
+    "전) 경기도당 위원장",
+    "21대 대선 공동선대위원장, 홍보본부장",
+    "전) 미래희망위원장",
+    "전) 이원욱 국회의원실 선임비서관"
+   ],
+   "activities": [],
+   "age": 36,
+   "sns": [
+    {
+     "label": "페이스북",
+     "url": "https://www.facebook.com/seonggyun.jeon.7"
+    },
+    {
+     "label": "인스타그램",
+     "url": "https://www.instagram.com/jeonsk_reform/"
+    },
+    {
+     "label": "유튜브",
+     "url": "https://www.youtube.com/@resetkorea_revolution"
     }
    ]
   },
@@ -572,38 +612,6 @@
    ]
   },
   {
-   "personId": "person_017",
-   "name": "조동운",
-   "region": "대전",
-   "districtName": "서구 갑",
-   "status": "organizing_chair",
-   "statusLabel": "조직위원장",
-   "sggCode": "2300301",
-   "sggName": "대전 서구갑",
-   "party": "개혁신당",
-   "education": [],
-   "career": [
-    "대전광역시당 위원장 직무대행",
-    "전) 서구 갑 당협위원장",
-    "전) 경찰대학 경찰학과 교수",
-    "한국경찰연구원 원장",
-    "법학박사"
-   ],
-   "activities": [],
-   "photo": "https://i.imgur.com/q8Z5Mst.png",
-   "age": 64,
-   "sns": [
-    {
-     "label": "페이스북",
-     "url": "https://www.facebook.com/c2716898"
-    },
-    {
-     "label": "인스타그램",
-     "url": "https://www.instagram.com/c2716898/"
-    }
-   ]
-  },
-  {
    "personId": "person_018",
    "name": "류근윤",
    "region": "충북",
@@ -675,8 +683,8 @@
    "career": [
     "전) 달성군 당협위원장",
     "전) 달성군4-H연합회장",
-   "제21대 대통령선거 중앙선대위 일정기획단 부단장",
-   "ROTC 장교 (육군 중위) 전역"
+    "제21대 대통령선거 중앙선대위 일정기획단 부단장",
+    "ROTC 장교 (육군 중위) 전역"
    ],
    "activities": [],
    "photo": "https://i.imgur.com/Bi2Owdi.png",
@@ -714,7 +722,7 @@
    "education": [],
    "career": [
     "경기도당 부위원장",
-   "제5대 안산시의회 의원",
+    "제5대 안산시의회 의원",
     "현) (사)안산시 의정회 부회장",
     "문건축사사무소 대표"
    ],
@@ -791,6 +799,37 @@
    ],
    "activities": [],
    "age": 46
+  },
+  {
+   "personId": "person_021",
+   "name": "송창훈",
+   "photo": "https://i.imgur.com/czv11rh.png",
+   "region": "경기",
+   "districtName": "용인시 정",
+   "status": "organizing_chair",
+   "statusLabel": "조직위원장",
+   "sggCode": "2413702",
+   "sggName": "경기 용인정",
+   "party": "개혁신당",
+   "education": [],
+   "career": [
+    "개혁신당 중앙당 대변인",
+    "경기도당 수석 부위원장",
+    "용인시 정 조직위원장",
+    "현) 가천대학교 기계공학부 겸임교수"
+   ],
+   "activities": [],
+   "age": 31,
+   "sns": [
+    {
+     "label": "페이스북",
+     "url": "https://www.facebook.com/profile.php?id=100004103197128"
+    },
+    {
+     "label": "인스타그램",
+     "url": "https://www.instagram.com/song_c_h_/"
+    }
+   ]
   }
  ]
 }
