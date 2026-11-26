@@ -4,10 +4,10 @@ window.RF_FALLBACK['data/chairpersons.json']={
  "_meta": {
   "note": "조직 현황 데이터. status: chairperson(당협위원장) | organizing_chair(조직위원장) | application(조직위 신청). sggCode는 지도 데이터의 SGG_Code, sggName은 대조용 CSV 선거구명. 인사 변경 시 이 파일만 수정",
   "expectedCounts": {
-   "chairperson": 15,
+   "chairperson": 16,
    "organizing_chair": 10,
    "application": 1,
-   "total": 26
+   "total": 27
   },
   "test": false
  },
@@ -808,8 +808,8 @@ window.RF_FALLBACK['data/chairpersons.json']={
    "photo": "https://i.imgur.com/NFDmA6F.png",
    "region": "경기",
    "districtName": "용인시 정",
-   "status": "application",
-   "statusLabel": "조직위 신청",
+   "status": "chairperson",
+   "statusLabel": "당협위원장",
    "sggCode": "2413702",
    "sggName": "경기 용인정",
    "party": "개혁신당",
@@ -853,6 +853,39 @@ window.RF_FALLBACK['data/chairpersons.json']={
      "url": "https://www.threads.net/@kiin777"
     }
    ]
-  }
+  },
+ {
+  "personId": "person_027",
+  "name": "고금란",
+  "photo": "https://i.imgur.com/sA6Zbmx.png",
+  "region": "경기",
+  "districtName": "의왕시·과천시",
+  "status": "application",
+  "statusLabel": "조직위 신청",
+  "sggCode": "2412401",
+  "sggName": "경기 의왕과천",
+  "party": "개혁신당",
+  "education": [],
+  "career": [
+   "제7,8대 과천시의원",
+   "제8대 과천시의회 의장(후기)",
+   "개혁신당 대변인"
+  ],
+  "activities": [],
+  "sns": [
+   {
+    "label": "페이스북",
+    "url": "https://www.facebook.com/keumran.go/"
+   },
+   {
+    "label": "유튜브",
+    "url": "https://www.youtube.com/@gogeumranTV"
+   },
+   {
+    "label": "블로그",
+    "url": "https://blog.naver.com/mulan1997"
+   }
+  ]
+ }
  ]
 };
